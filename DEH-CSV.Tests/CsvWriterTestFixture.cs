@@ -22,6 +22,7 @@ namespace RHEAGROUP.DEHCSV.Tests
 {
     using System;
     using System.Collections.Concurrent;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
@@ -110,6 +111,23 @@ namespace RHEAGROUP.DEHCSV.Tests
             var result = this.csvWriter.QueryFileName(propertyMap);
 
             Assert.That(result, Is.EqualTo("EngineeringModelSetup-Name-Definition"));
+        }
+
+        [Test]
+        public void Verify_that_argument_exceptions_are_thrown_on_write()
+        {
+            Assert.That(() => this.csvWriter.Write(null, null, null), 
+                Throws.TypeOf<ArgumentNullException>());
+
+            var things = new List<Thing>();
+
+            Assert.That(() => this.csvWriter.Write(things, null, null),
+                Throws.TypeOf<ArgumentNullException>());
+
+            var typeMap = new TypeMap();
+
+            Assert.That(() => this.csvWriter.Write(things, typeMap, null),
+                Throws.TypeOf<ArgumentNullException>());
         }
     }
 }
