@@ -55,8 +55,6 @@ namespace RHEAGROUP.DEHCSV.Tests
 
         private Uri uri;
 
-        private ConcurrentDictionary<CDP4Common.Types.CacheKey, Lazy<Thing>> cache;
-
         private string mappingPath;
 
         [SetUp]

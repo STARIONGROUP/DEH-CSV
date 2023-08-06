@@ -83,47 +83,6 @@ namespace RHEAGROUP.DEHCSV
         }
 
         /// <summary>
-        /// Writes all <see cref="Thing"/>  that are contained by the <see cref="SiteDirectory"/>
-        /// </summary>
-        /// <param name="siteDirectory"></param>
-        /// <param name="things"></param>
-        /// <param name="maps"></param>
-        /// <param name="target"></param>
-        private void WriteSiteDirectoryThings(SiteDirectory siteDirectory, IEnumerable<Thing> things, IEnumerable<TypeMap> maps, DirectoryInfo target)
-        {
-            var siteDirectoryThings = things.Where(x => x.TopContainer == siteDirectory).ToList();
-
-            foreach (var typeMap in maps)
-            {
-                var targetThings = siteDirectoryThings.Where(x => x.ClassKind == typeMap.ClassKind).ToList();
-
-                this.Write(targetThings, typeMap, target);
-            }
-        }
-
-        /// <summary>
-        /// Writes all <see cref="Thing"/>s that are contained by the <see cref="EngineeringModel"/> which is the container of the
-        /// provided <see cref="Iteration"/>
-        /// </summary>
-        /// <param name="iteration">
-        /// The <see cref="Iteration"/> that is to be written to the CSV file
-        /// ></param>
-        /// <param name="things"></param>
-        /// <param name="maps"></param>
-        /// <param name="target"></param>
-        private void WriteEngineeringModelThings(Iteration iteration, IEnumerable<Thing> things, IEnumerable<TypeMap> maps, DirectoryInfo target)
-        {
-            var engineeringModelThings = things.Where(x => x.TopContainer == iteration.TopContainer).ToList();
-
-            foreach (var typeMap in maps)
-            {
-                var targetThings = engineeringModelThings.Where(x => x.ClassKind == typeMap.ClassKind).ToList();
-
-                this.Write(targetThings, typeMap, target);
-            }
-        }
-
-        /// <summary>
         /// Writes the provide things to the target <see cref="DirectoryInfo"/>
         /// </summary>
         /// <param name="things"></param>
@@ -191,6 +150,47 @@ namespace RHEAGROUP.DEHCSV
                 }
 
                 csvWriter.NextRecord();
+            }
+        }
+
+        /// <summary>
+        /// Writes all <see cref="Thing"/>  that are contained by the <see cref="SiteDirectory"/>
+        /// </summary>
+        /// <param name="siteDirectory"></param>
+        /// <param name="things"></param>
+        /// <param name="maps"></param>
+        /// <param name="target"></param>
+        private void WriteSiteDirectoryThings(SiteDirectory siteDirectory, IEnumerable<Thing> things, IEnumerable<TypeMap> maps, DirectoryInfo target)
+        {
+            var siteDirectoryThings = things.Where(x => x.TopContainer == siteDirectory).ToList();
+
+            foreach (var typeMap in maps)
+            {
+                var targetThings = siteDirectoryThings.Where(x => x.ClassKind == typeMap.ClassKind).ToList();
+
+                this.Write(targetThings, typeMap, target);
+            }
+        }
+
+        /// <summary>
+        /// Writes all <see cref="Thing"/>s that are contained by the <see cref="EngineeringModel"/> which is the container of the
+        /// provided <see cref="Iteration"/>
+        /// </summary>
+        /// <param name="iteration">
+        /// The <see cref="Iteration"/> that is to be written to the CSV file
+        /// ></param>
+        /// <param name="things"></param>
+        /// <param name="maps"></param>
+        /// <param name="target"></param>
+        private void WriteEngineeringModelThings(Iteration iteration, IEnumerable<Thing> things, IEnumerable<TypeMap> maps, DirectoryInfo target)
+        {
+            var engineeringModelThings = things.Where(x => x.TopContainer == iteration.TopContainer).ToList();
+
+            foreach (var typeMap in maps)
+            {
+                var targetThings = engineeringModelThings.Where(x => x.ClassKind == typeMap.ClassKind).ToList();
+
+                this.Write(targetThings, typeMap, target);
             }
         }
 
