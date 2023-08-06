@@ -5,7 +5,24 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DEH-CSV", "DEH-CSV\DEH-CSV.csproj", "{9E9166AE-65CE-41E6-9544-BF8626E3AE7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DEH-CSV.Tests", "DEH-CSV.Tests\DEH-CSV.Tests.csproj", "{15B3BF5C-DCE2-4FDB-B4AE-CADC1D8E65B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DEH-CSV.Tests", "DEH-CSV.Tests\DEH-CSV.Tests.csproj", "{15B3BF5C-DCE2-4FDB-B4AE-CADC1D8E65B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A5BF998-2249-4E13-980F-95B326A2F6A9}"
+	ProjectSection(SolutionItems) = preProject
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
+		coverlet.runsettings = coverlet.runsettings
+		LICENSE = LICENSE
+		NOTICE = NOTICE
+		Nuget.Config = Nuget.Config
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Github", "Github", "{9F048FBD-6AC5-4DD4-B91B-271A9C4B5488}"
+	ProjectSection(SolutionItems) = preProject
+		.github\CONTRIBUTING.md = .github\CONTRIBUTING.md
+		.github\ISSUE_TEMPLATE.md = .github\ISSUE_TEMPLATE.md
+		.github\PULL_REQUEST_TEMPLATE.md = .github\PULL_REQUEST_TEMPLATE.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
