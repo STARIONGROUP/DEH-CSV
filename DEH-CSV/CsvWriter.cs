@@ -85,9 +85,12 @@ namespace RHEAGROUP.DEHCSV
         /// <summary>
         /// Writes the provide things to the target <see cref="DirectoryInfo"/>
         /// </summary>
-        /// <param name="things"></param>
+        /// <param name="things">
+        /// The <see cref="List{Thing}"/> that is to be written to the CSV files
+        /// </param>
         /// <param name="typeMap">
-        /// The <see cref="TypeMap"/> that is used for mapping
+        /// The <see cref="TypeMap"/> that is used for mapping <see cref="Thing"/> properties
+        /// to CSV columns
         /// </param>
         /// <param name="target">
         /// The target <see cref="DirectoryInfo"/> to which the CSV file is to be written
@@ -156,10 +159,18 @@ namespace RHEAGROUP.DEHCSV
         /// <summary>
         /// Writes all <see cref="Thing"/>  that are contained by the <see cref="SiteDirectory"/>
         /// </summary>
-        /// <param name="siteDirectory"></param>
-        /// <param name="things"></param>
-        /// <param name="maps"></param>
-        /// <param name="target"></param>
+        /// <param name="siteDirectory">
+        /// The <see cref="SiteDirectory"/> top container
+        /// </param>
+        /// <param name="things">
+        /// The <see cref="List{Thing}"/> that is to be written to the CSV files
+        /// </param>
+        /// <param name="maps">
+        /// An <see cref="IEnumerable{TypeMap}"/> that specifies how the data is to be written
+        /// </param>
+        /// <param name="target">
+        /// The target <see cref="DirectoryInfo"/> to which the CSV file is to be written
+        /// </param>
         private void WriteSiteDirectoryThings(SiteDirectory siteDirectory, IEnumerable<Thing> things, IEnumerable<TypeMap> maps, DirectoryInfo target)
         {
             var siteDirectoryThings = things.Where(x => x.TopContainer == siteDirectory).ToList();
@@ -179,9 +190,15 @@ namespace RHEAGROUP.DEHCSV
         /// <param name="iteration">
         /// The <see cref="Iteration"/> that is to be written to the CSV file
         /// ></param>
-        /// <param name="things"></param>
-        /// <param name="maps"></param>
-        /// <param name="target"></param>
+        /// <param name="things">
+        /// The <see cref="List{Thing}"/> that is to be written to the CSV files
+        /// </param>
+        /// <param name="maps">
+        /// An <see cref="IEnumerable{TypeMap}"/> that specifies how the data is to be written
+        /// </param>
+        /// <param name="target">
+        /// The target <see cref="DirectoryInfo"/> to which the CSV file is to be written
+        /// </param>
         private void WriteEngineeringModelThings(Iteration iteration, IEnumerable<Thing> things, IEnumerable<TypeMap> maps, DirectoryInfo target)
         {
             var engineeringModelThings = things.Where(x => x.TopContainer == iteration.TopContainer).ToList();
@@ -198,7 +215,7 @@ namespace RHEAGROUP.DEHCSV
         /// Writes the Header (first row) to the CSV file
         /// </summary>
         /// <param name="csvWriter">
-        /// The target <see cref="csvWriter"/>
+        /// The target <see cref="CsvHelper.CsvWriter"/>
         /// </param>
         /// <param name="typeMap">
         /// The <see cref="TypeMap"/> used to write the header data
