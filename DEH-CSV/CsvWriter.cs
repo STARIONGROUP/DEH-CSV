@@ -36,6 +36,7 @@ namespace RHEAGROUP.DEHCSV
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Logging.Abstractions;
 
+    using RHEAGROUP.DEHCSV.CustomProperties;
     using RHEAGROUP.DEHCSV.Mapping;
 
     /// <summary>
@@ -169,7 +170,7 @@ namespace RHEAGROUP.DEHCSV
             {
                 foreach (var propertyMap in typeMap.Properties)
                 {
-                    var queryResult = thing.QueryValue(propertyMap.Source);
+                    var queryResult = this.QueryValue(thing, propertyMap, options);
 
                     if (queryResult is IEnumerable<object> queriedValues)
                     {
@@ -201,6 +202,35 @@ namespace RHEAGROUP.DEHCSV
 
             this.logger.LogDebug("A total of {records} records was written to {filepath} in {time} [ms]",
                 things.Count(), path, sw.ElapsedMilliseconds);
+        }
+
+        /// <summary>
+        /// Queries the value from the <see cref="Thing"/> based on the information
+        /// encoded in the <see cref="PropertyMap"/>
+        /// </summary>
+        /// <param name="thing">
+        /// The subject <see cref="Thing"/>
+        /// </param>
+        /// <param name="propertyMap">
+        /// The subject <see cref="PropertyMap"/>
+        /// </param>
+        /// <param name="options">
+        /// an object that may contain any kind of configuration that is required
+        /// for the evaluation of the custom property. This may be a value property
+        /// such as a string or int or a complex object. It is the responsibility
+        /// of the interface implementation to verify that the options argument is
+        /// of the correct type
+        /// </param>
+        /// <returns>
+        /// the value associated to the <see cref="Thing"/> and <see cref="PropertyMap"/>
+        /// </returns>
+        /// <remarks>
+        /// Override this method in case <see cref="ICustomPropertyEvaluator"/> need to
+        /// be used to query the property value of the provided <see cref="Thing"/>
+        /// </remarks>
+        protected virtual object QueryValue(Thing thing, PropertyMap propertyMap, object options)
+        {
+            return thing.QueryValue(propertyMap.Source);
         }
 
         /// <summary>

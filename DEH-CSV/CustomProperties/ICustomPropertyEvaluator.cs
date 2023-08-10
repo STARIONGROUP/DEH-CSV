@@ -18,7 +18,7 @@
 //  </copyright>
 //  -------------------------------------------------------------------------------------------------
 
-namespace RHEAGROUP.DEHCSV.CustomPropertyWriter
+namespace RHEAGROUP.DEHCSV.CustomProperties
 {
     using CDP4Common.CommonData;
     
@@ -49,6 +49,6 @@ namespace RHEAGROUP.DEHCSV.CustomPropertyWriter
         /// <returns>
         /// a string that represents the value of the custom property
         /// </returns>
-        public string QueryValue(Thing thing, object options);
+        public string QueryValue(Thing thing, PropertyMap propertyMap, object options);
     }
 }
