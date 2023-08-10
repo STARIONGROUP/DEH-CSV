@@ -30,9 +30,14 @@ namespace RHEAGROUP.DEHCSV.Mapping
     public class TypeMap
     {
         /// <summary>
+        /// Gets or sets an optinal name for the CSV filename
+        /// </summary>
+        public string FileName { get; set; }
+
+        /// <summary>
         /// Gets or sets the <see cref="ClassKind"/> of the ECSS-E-TM-10-25 class
         /// </summary>
-        public ClassKind ClassKind { get; set; }
+        public ClassKind ClassKind { get; set; } = ClassKind.NotThing;
 
         /// <summary>
         /// Gets or sets the <see cref="PropertyMap"/>s

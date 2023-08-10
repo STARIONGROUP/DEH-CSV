@@ -47,8 +47,6 @@ namespace RHEAGROUP.DEHCSV.Tests.Mapping
         {
             this.loggerFactory = LoggerFactory.Create(builder =>
                 builder.AddConsole().SetMinimumLevel(LogLevel.Trace));
-
-            this.logger = this.loggerFactory.CreateLogger<MappingProvider>();
         }
 
         [Test]
@@ -56,7 +54,7 @@ namespace RHEAGROUP.DEHCSV.Tests.Mapping
         {
             var path = Path.Combine(TestContext.CurrentContext.TestDirectory,"Data", "mapping.json");
             
-            var  mappingProvider = new MappingProvider(this.logger);
+            var  mappingProvider = new MappingProvider(this.loggerFactory);
 
             var typeMapping = mappingProvider.QueryMappings(path).First();
 

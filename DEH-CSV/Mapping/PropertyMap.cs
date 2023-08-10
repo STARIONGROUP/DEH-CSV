@@ -31,6 +31,12 @@ namespace RHEAGROUP.DEHCSV.Mapping
         public string Source { get; set; }
 
         /// <summary>
+        /// Gets or sets a string that is used to prefix the value that will be written to the
+        /// value of the <see cref="Target"/> property
+        /// </summary>
+        public string ValuePrefix { get; set; }
+
+        /// <summary>
         /// Gets or sets the target property name
         /// </summary>
         public string Target { get; set; }

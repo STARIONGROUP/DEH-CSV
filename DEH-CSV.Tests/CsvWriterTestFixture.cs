@@ -21,14 +21,14 @@
 namespace RHEAGROUP.DEHCSV.Tests
 {
     using System;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
     using CDP4Common.CommonData;
-
+    using CDP4Common.EngineeringModelData;
+    using CDP4Common.SiteDirectoryData;
     using CDP4Dal;
     using CDP4Dal.DAL;
 
@@ -65,13 +65,11 @@ namespace RHEAGROUP.DEHCSV.Tests
             this.loggerFactory = LoggerFactory.Create(builder =>
                 builder.AddConsole().SetMinimumLevel(LogLevel.Trace));
 
-            var logger = this.loggerFactory.CreateLogger<CsvWriter>();
-            
-            this.mappingProvider = new MappingProvider(this.loggerFactory.CreateLogger<MappingProvider>());
+            this.mappingProvider = new MappingProvider(this.loggerFactory);
 
-            this.iterationReader = new IterationReader(this.loggerFactory.CreateLogger<IterationReader>());
+            this.iterationReader = new IterationReader(this.loggerFactory);
 
-            this.csvWriter = new CsvWriter(logger);
+            this.csvWriter = new CsvWriter(this.loggerFactory);
         }
 
         [Test]
@@ -96,7 +94,53 @@ namespace RHEAGROUP.DEHCSV.Tests
 
             var mapping = this.mappingProvider.QueryMappings(this.mappingPath);
 
-            Assert.That(() => this.csvWriter.Write(session.RetrieveSiteDirectory(), iteration, mapping, target), Throws.Nothing);
+            Assert.That(() => this.csvWriter.Write(session.RetrieveSiteDirectory(), iteration, true,mapping, target, null), Throws.Nothing);
+        }
+
+        [Test]
+        public async Task Verify_that_when_ValuePrefix_is_set_CSV_File_is_Written_with_prefix()
+        {
+            var jsonFileDal = new CDP4JsonFileDal.JsonFileDal();
+
+            var path = Path.Combine(TestContext.CurrentContext.WorkDirectory, "Data", "demo-space.zip");
+
+            this.uri = new Uri(path);
+
+            var credentials = new Credentials("admin", "pass", uri);
+
+            var session = new Session(jsonFileDal, credentials);
+
+            await session.Open(false);
+
+            var iteration = await this.iterationReader.Read(session, "DM_SPC", 1, "SYS");
+            
+            var typeMaps = new List<TypeMap>
+            {
+                new TypeMap()
+                {
+                    ClassKind = ClassKind.SiteDirectory,
+                    FileName = "SiteDirectory-Test-With-Prefix",
+                    Properties = new List<PropertyMap>()
+                    {
+                        new PropertyMap()
+                        {
+                            Source = "shortname",
+                            Target = "shortname"
+                        },
+                        new PropertyMap()
+                        {
+                            Source = "name",
+                            Target = "name",
+                            ValuePrefix = "prefix-"
+                        },
+                    }
+                }
+            };
+
+            var outputPath = Path.Combine(TestContext.CurrentContext.WorkDirectory, "CSV");
+            var target = new DirectoryInfo(outputPath);
+
+            Assert.That(() => this.csvWriter.Write(session.RetrieveSiteDirectory(), iteration,true, typeMaps, target, null), Throws.Nothing);
         }
 
         [Test]
@@ -104,27 +148,39 @@ namespace RHEAGROUP.DEHCSV.Tests
         {
             var mappings = this.mappingProvider.QueryMappings(this.mappingPath);
 
-            var propertyMap = mappings.First();
+            var typeMap = mappings.First();
 
-            var result = this.csvWriter.QueryFileName(propertyMap);
+            var result = this.csvWriter.QueryFileName(typeMap);
 
             Assert.That(result, Is.EqualTo("EngineeringModelSetup-Name-Definition"));
         }
 
         [Test]
+        public void Verify_that_when_FileName_is_provided_QueryFileName_returns_expected_result()
+        {
+            var typeMap = new TypeMap
+            {
+                ClassKind = ClassKind.ActionItem,
+                FileName = "TEST"
+            };
+            var result = this.csvWriter.QueryFileName(typeMap);
+            Assert.That(result, Is.EqualTo("TEST"));
+        }
+
+        [Test]
         public void Verify_that_argument_exceptions_are_thrown_on_write()
         {
-            Assert.That(() => this.csvWriter.Write(null, null, null), 
+            Assert.That(() => this.csvWriter.Write(null, null, null, null), 
                 Throws.TypeOf<ArgumentNullException>());
 
             var things = new List<Thing>();
 
-            Assert.That(() => this.csvWriter.Write(things, null, null),
+            Assert.That(() => this.csvWriter.Write(things, null, null, null),
                 Throws.TypeOf<ArgumentNullException>());
 
             var typeMap = new TypeMap();
 
-            Assert.That(() => this.csvWriter.Write(things, typeMap, null),
+            Assert.That(() => this.csvWriter.Write(things, typeMap, null, null),
                 Throws.TypeOf<ArgumentNullException>());
         }
     }

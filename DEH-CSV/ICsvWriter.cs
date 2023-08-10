@@ -44,12 +44,24 @@ namespace RHEAGROUP.DEHCSV
         /// <param name="iteration">
         /// The <see cref="Iteration"/> that is to be written
         /// </param>
+        /// <param name="includeNestedElements">
+        /// A value that indicates whether a volatile nested element tree needs to be generated 
+        /// for each <see cref="Option"/> in the provided <see cref="Iteration"/> and added to
+        /// the <see cref="Thing"/>s for which CSVs are to be written
+        /// </param>
         /// <param name="maps">
         /// An <see cref="IEnumerable{TypeMap}"/> that specifies how the data is to be written
         /// </param>
         /// <param name="target">
         /// The target <see cref="DirectoryInfo"/> to which the CSV file is to be written
         /// </param>
-        public void Write(SiteDirectory siteDirectory, Iteration iteration, IEnumerable<TypeMap> maps, DirectoryInfo target);
+        /// <param name="options">
+        /// an object that may contain any kind of configuration that is required
+        /// for the evaluation of the custom property. This may be a value property
+        /// such as a string or int or a complex object. It is the responsibility
+        /// of the interface implementation to verify that the options argument is
+        /// of the correct type
+        /// </param>
+        public void Write(SiteDirectory siteDirectory, Iteration iteration, bool includeNestedElements, IEnumerable<TypeMap> maps, DirectoryInfo target, object options);
     }
 }

@@ -24,12 +24,31 @@ namespace RHEAGROUP.DEHCSV.Services
 
     using CDP4Dal.DAL;
 
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Logging.Abstractions;
+
     /// <summary>
     /// The purpose of the <see cref="IDataSourceSelector"/> is to select the appropriate <see cref="IDal"/> implementation
     /// based on the provided URI
     /// </summary>
     public class DataSourceSelector : IDataSourceSelector
     {
+        /// <summary>
+        /// The (injected) <see cref="ILogger{DataSourceSelector}"/>
+        /// </summary>
+        private readonly ILogger<DataSourceSelector> logger;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataSourceSelector"/>
+        /// </summary>
+        /// <param name="loggerFactory">
+        /// The (injected) <see cref="ILoggerFactory"/> used to setup logging
+        /// </param>
+        public DataSourceSelector(ILoggerFactory loggerFactory = null)
+        {
+            this.logger = loggerFactory == null ? NullLogger<DataSourceSelector>.Instance : loggerFactory.CreateLogger<DataSourceSelector>();
+        }
+
         /// <summary>
         /// Selects the <see cref="IDal"/> implementation based on the scheme of the URI. Only HTTP, HTTPS and FILE 
         /// are supported
@@ -47,10 +66,14 @@ namespace RHEAGROUP.DEHCSV.Services
                 case "http":
                 case "https":
 
+                    this.logger.LogInformation("a CdpServicesDal will be used to read ECSS-E-TM-10-25 data");
+
                     var cdpServicesDal = new CDP4ServicesDal.CdpServicesDal();
                     return cdpServicesDal;
 
                 case "file":
+
+                    this.logger.LogInformation("a JsonFileDal will be used to read ECSS-E-TM-10-25 data");
 
                     var jsonFileDal = new CDP4JsonFileDal.JsonFileDal();
                     return jsonFileDal;

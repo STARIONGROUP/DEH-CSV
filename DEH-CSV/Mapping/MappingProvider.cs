@@ -26,6 +26,7 @@ namespace RHEAGROUP.DEHCSV.Mapping
     using System.Text.Json.Serialization;
 
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Logging.Abstractions;
 
     /// <summary>
     /// The <see cref="MappingProvider"/> is used to provide the ECSS-E-TM-10-25 types to CSV mappings
@@ -40,12 +41,12 @@ namespace RHEAGROUP.DEHCSV.Mapping
         /// <summary>
         /// Initializes a new instance of the <see cref="MappingProvider"/>
         /// </summary>
-        /// <param name="logger">
-        /// The (injected) <see cref="ILogger{MappingProvider}"/>
+        /// <param name="loggerFactory">
+        /// The (injected) <see cref="ILoggerFactory"/> used to setup logging
         /// </param>
-        public MappingProvider(ILogger<MappingProvider> logger)
+        public MappingProvider(ILoggerFactory loggerFactory = null)
         {
-            this.logger = logger;
+            this.logger = loggerFactory == null ? NullLogger<MappingProvider>.Instance : loggerFactory.CreateLogger<MappingProvider>();
         }
 
         /// <summary>
@@ -72,6 +73,8 @@ namespace RHEAGROUP.DEHCSV.Mapping
             };
 
             var mappings = JsonSerializer.Deserialize<List<TypeMap>>(json, options);
+
+            this.logger.LogDebug("A total of {count} mappings have been found", mappings.Count);
 
             return mappings;
         }

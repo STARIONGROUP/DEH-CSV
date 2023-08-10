@@ -22,16 +22,19 @@ namespace RHEAGROUP.DEHCSV
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Globalization;
     using System.IO;
     using System.Linq;
 
     using CDP4Common.CommonData;
     using CDP4Common.EngineeringModelData;
+    using CDP4Common.Helpers;
     using CDP4Common.PropertyAccesor;
     using CDP4Common.SiteDirectoryData;
 
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Logging.Abstractions;
 
     using RHEAGROUP.DEHCSV.Mapping;
 
@@ -50,12 +53,12 @@ namespace RHEAGROUP.DEHCSV
         /// <summary>
         /// Initializes a new instance of the <see cref="CsvWriter"/>
         /// </summary>
-        /// <param name="logger">
-        /// The (injected) <see cref="ILogger{CsvWriter}"/>
+        /// <param name="loggerFactory">
+        /// The (injected) <see cref="ILoggerFactory"/> used to setup logging
         /// </param>
-        public CsvWriter(ILogger<CsvWriter> logger)
+        public CsvWriter(ILoggerFactory loggerFactory = null)
         {
-            this.logger = logger;
+            this.logger = loggerFactory == null ? NullLogger<CsvWriter>.Instance : loggerFactory.CreateLogger<CsvWriter>();
         }
 
         /// <summary>
@@ -70,16 +73,49 @@ namespace RHEAGROUP.DEHCSV
         /// <param name="maps">
         /// An <see cref="IEnumerable{TypeMap}"/> that specifies how the data is to be written
         /// </param>
+        /// <param name="includeNestedElements">
+        /// A value that indicates whether a volatile nested element tree needs to be generated 
+        /// for each <see cref="Option"/> in the provided <see cref="Iteration"/> and added to
+        /// the <see cref="Thing"/>s for which CSVs are to be written
+        /// </param>
         /// <param name="target">
         /// The target <see cref="DirectoryInfo"/> to which the CSV file is to be written
         /// </param>
-        public void Write(SiteDirectory siteDirectory, Iteration iteration, IEnumerable<TypeMap> maps, DirectoryInfo target)
+        /// <param name="options">
+        /// an object that may contain any kind of configuration that is required
+        /// for the evaluation of the custom property. This may be a value property
+        /// such as a string or int or a complex object. It is the responsibility
+        /// of the interface implementation to verify that the options argument is
+        /// of the correct type
+        /// </param>
+        public void Write(SiteDirectory siteDirectory, Iteration iteration, bool includeNestedElements, IEnumerable<TypeMap> maps, DirectoryInfo target, object options)
         {
-            var values = siteDirectory.Cache.Select(item => item.Value.Value).ToList();
+            var things = siteDirectory.Cache.Select(item => item.Value.Value).ToList();
 
-            this.WriteSiteDirectoryThings(siteDirectory, values, maps, target);
+            if (includeNestedElements)
+            {
+                this.logger.LogDebug("Generating Nested Elements to be included in the data set");
 
-            this.WriteEngineeringModelThings(iteration, values, maps, target);
+                var nestedElementTreeGenerator = new NestedElementTreeGenerator();
+
+                foreach (CDP4Common.EngineeringModelData.Option option in iteration.Option)
+                {
+                    nestedElementTreeGenerator.Generate(option, true);
+
+                    things.AddRange(option.NestedElement);
+                }
+            }
+
+            this.logger.LogDebug("A total of {count} are available in the data set", things.Count);
+
+            foreach (var typeMap in maps)
+            {
+                var targetThings = things.Where(x => x.ClassKind == typeMap.ClassKind).ToList();
+
+                this.Write(targetThings, typeMap, target, options);
+
+                this.logger.LogInformation("Writing CSV file for {classKind}", typeMap.ClassKind);
+            }
         }
 
         /// <summary>
@@ -95,7 +131,7 @@ namespace RHEAGROUP.DEHCSV
         /// <param name="target">
         /// The target <see cref="DirectoryInfo"/> to which the CSV file is to be written
         /// </param>
-        public virtual void Write(IEnumerable<Thing> things, TypeMap typeMap, DirectoryInfo target)
+        public virtual void Write(IEnumerable<Thing> things, TypeMap typeMap, DirectoryInfo target, object options)
         {
             if (things == null)
             {
@@ -117,11 +153,13 @@ namespace RHEAGROUP.DEHCSV
                 target.Create();
             }
 
+            var sw = Stopwatch.StartNew();
+
             var filename = this.QueryFileName(typeMap);
 
-            var path = Path.Combine(target.FullName, $"{filename}-export.csv");
+            var path = Path.Combine(target.FullName, $"{filename}.csv");
 
-            using var writer = new StreamWriter(path);
+            using var writer = System.IO.File.CreateText(path);
 
             using var csvWriter = new CsvHelper.CsvWriter(writer, CultureInfo.InvariantCulture);
 
@@ -137,13 +175,17 @@ namespace RHEAGROUP.DEHCSV
                     {
                         var csvValue = string.Join(propertyMap.Separator, queriedValues);
 
+                        csvValue = propertyMap.ValuePrefix + csvValue;
+
                         csvWriter.WriteField(csvValue, true);
                     }
                     else
                     {
                         if (queryResult != null)
                         {
-                            csvWriter.WriteField(queryResult.ToString(), true);
+                            var csvValue = propertyMap.ValuePrefix + queryResult.ToString();
+                            
+                            csvWriter.WriteField(csvValue, true);
                         }
                         else
                         {
@@ -154,61 +196,11 @@ namespace RHEAGROUP.DEHCSV
 
                 csvWriter.NextRecord();
             }
-        }
 
-        /// <summary>
-        /// Writes all <see cref="Thing"/>  that are contained by the <see cref="SiteDirectory"/>
-        /// </summary>
-        /// <param name="siteDirectory">
-        /// The <see cref="SiteDirectory"/> top container
-        /// </param>
-        /// <param name="things">
-        /// The <see cref="List{Thing}"/> that is to be written to the CSV files
-        /// </param>
-        /// <param name="maps">
-        /// An <see cref="IEnumerable{TypeMap}"/> that specifies how the data is to be written
-        /// </param>
-        /// <param name="target">
-        /// The target <see cref="DirectoryInfo"/> to which the CSV file is to be written
-        /// </param>
-        private void WriteSiteDirectoryThings(SiteDirectory siteDirectory, IEnumerable<Thing> things, IEnumerable<TypeMap> maps, DirectoryInfo target)
-        {
-            var siteDirectoryThings = things.Where(x => x.TopContainer == siteDirectory).ToList();
+            csvWriter.Flush();
 
-            foreach (var typeMap in maps)
-            {
-                var targetThings = siteDirectoryThings.Where(x => x.ClassKind == typeMap.ClassKind).ToList();
-
-                this.Write(targetThings, typeMap, target);
-            }
-        }
-
-        /// <summary>
-        /// Writes all <see cref="Thing"/>s that are contained by the <see cref="EngineeringModel"/> which is the container of the
-        /// provided <see cref="Iteration"/>
-        /// </summary>
-        /// <param name="iteration">
-        /// The <see cref="Iteration"/> that is to be written to the CSV file
-        /// ></param>
-        /// <param name="things">
-        /// The <see cref="List{Thing}"/> that is to be written to the CSV files
-        /// </param>
-        /// <param name="maps">
-        /// An <see cref="IEnumerable{TypeMap}"/> that specifies how the data is to be written
-        /// </param>
-        /// <param name="target">
-        /// The target <see cref="DirectoryInfo"/> to which the CSV file is to be written
-        /// </param>
-        private void WriteEngineeringModelThings(Iteration iteration, IEnumerable<Thing> things, IEnumerable<TypeMap> maps, DirectoryInfo target)
-        {
-            var engineeringModelThings = things.Where(x => x.TopContainer == iteration.TopContainer).ToList();
-
-            foreach (var typeMap in maps)
-            {
-                var targetThings = engineeringModelThings.Where(x => x.ClassKind == typeMap.ClassKind).ToList();
-
-                this.Write(targetThings, typeMap, target);
-            }
+            this.logger.LogDebug("A total of {records} records was written to {filepath} in {time} [ms]",
+                things.Count(), path, sw.ElapsedMilliseconds);
         }
 
         /// <summary>
@@ -245,6 +237,11 @@ namespace RHEAGROUP.DEHCSV
         /// </returns>
         protected internal string QueryFileName(TypeMap typeMap)
         {
+            if (!string.IsNullOrEmpty(typeMap.FileName))
+            {
+                return typeMap.FileName;
+            }
+
             var result = new List<string> { typeMap.ClassKind.ToString() };
 
             foreach (var propertyMap in typeMap.Properties)

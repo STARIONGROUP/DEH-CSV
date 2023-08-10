@@ -31,6 +31,7 @@ namespace RHEAGROUP.DEHCSV.Services
     using CDP4Common.Types;
 
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Logging.Abstractions;
 
     /// <summary>
     /// The purpose of the <see cref="IIterationReader"/> is to read an <see cref="Iteration"/>
@@ -46,12 +47,12 @@ namespace RHEAGROUP.DEHCSV.Services
         /// <summary>
         /// Initializes a new instance of the <see cref="IterationReader"/>
         /// </summary>
-        /// <param name="logger">
-        /// The (injected) <see cref="ILogger{IterationReader}"/>
+        /// <param name="loggerFactory">
+        /// The (injected) <see cref="ILoggerFactory"/> used to setup logging
         /// </param>
-        public IterationReader(ILogger<IterationReader> logger)
+        public IterationReader(ILoggerFactory loggerFactory = null)
         {
-            this.logger = logger;
+            this.logger = loggerFactory == null ? NullLogger<IterationReader>.Instance : loggerFactory.CreateLogger<IterationReader>();
         }
 
         /// <summary>

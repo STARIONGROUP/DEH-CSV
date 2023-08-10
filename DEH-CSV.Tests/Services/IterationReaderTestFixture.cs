@@ -48,10 +48,8 @@ namespace RHEAGROUP.DEHCSV.Tests.Services
         {
             this.loggerFactory = LoggerFactory.Create(builder =>
                 builder.AddConsole().SetMinimumLevel(LogLevel.Trace));
-
-            var logger = this.loggerFactory.CreateLogger<IterationReader>();
-
-            this.iterationReader = new IterationReader(logger);
+            
+            this.iterationReader = new IterationReader(this.loggerFactory);
         }
 
         [Test]
