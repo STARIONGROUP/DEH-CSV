@@ -6,7 +6,7 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <PackageId>DEH-CSV</PackageId>
         <RootNamespace>RHEAGROUP.DEHCSV</RootNamespace>
-        <Version>0.1.0</Version>
+        <Version>1.0.0</Version>
         <LangVersion>latest</LangVersion>
         <PackageReleaseNotes>
             [Initial] Release
