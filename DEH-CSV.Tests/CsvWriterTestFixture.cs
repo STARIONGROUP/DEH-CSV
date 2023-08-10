@@ -27,8 +27,6 @@ namespace RHEAGROUP.DEHCSV.Tests
     using System.Threading.Tasks;
 
     using CDP4Common.CommonData;
-    using CDP4Common.EngineeringModelData;
-    using CDP4Common.SiteDirectoryData;
     using CDP4Dal;
     using CDP4Dal.DAL;
 

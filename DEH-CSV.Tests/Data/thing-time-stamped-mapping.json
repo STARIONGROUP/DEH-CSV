@@ -9,6 +9,10 @@
       {
         "source": "Definition[0..*].Content",
         "target": "description"
+      },
+      {
+        "source": "ThingTimeStampPropertyEvaluator",
+        "target": "timestamp"
       }
     ]
   },
@@ -22,6 +26,10 @@
       {
         "source": "Description",
         "target": "description"
+      },
+      {
+        "source": "ThingTimeStampPropertyEvaluator",
+        "target": "timestamp"
       }
     ]
   },
@@ -35,6 +43,10 @@
       {
         "source": "Definition[0..*].Content",
         "target": "description"
+      },
+      {
+        "source": "ThingTimeStampPropertyEvaluator",
+        "target": "timestamp"
       }
     ]
   },
@@ -56,6 +68,10 @@
       {
         "source": "Parameter[0..*].ParameterType.Name",
         "target": "parameters.name"
+      },
+      {
+        "source": "ThingTimeStampPropertyEvaluator",
+        "target": "timestamp"
       }
     ]
   },
@@ -77,6 +93,10 @@
       {
         "source": "ParameterOverride[0..*].ParameterType.Name",
         "target": "paramoverride.name"
+      },
+      {
+        "source": "ThingTimeStampPropertyEvaluator",
+        "target": "timestamp"
       }
     ]
   },
@@ -91,6 +111,14 @@
         "source": "ValueSet[0..*].ActualValue[0..*]",
         "target": "value",
         "separator": ";"
+      },
+      {
+        "source": "ThingTimeStampPropertyEvaluator",
+        "target": "timestamp"
+      },
+      {
+        "source": "ThingTimeStampPropertyEvaluator",
+        "target": "timestamp"
       }
     ]
   },
@@ -105,6 +133,10 @@
         "source": "ValueSet[0..*].ActualValue[0..*]",
         "target": "value",
         "separator": ";"
+      },
+      {
+        "source": "ThingTimeStampPropertyEvaluator",
+        "target": "timestamp"
       }
     ]
   }
