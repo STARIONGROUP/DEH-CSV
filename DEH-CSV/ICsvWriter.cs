@@ -23,6 +23,7 @@ namespace RHEAGROUP.DEHCSV
     using System.Collections.Generic;
     using System.IO;
 
+    using CDP4Common.CommonData;
     using CDP4Common.EngineeringModelData;
     using CDP4Common.SiteDirectoryData;
 

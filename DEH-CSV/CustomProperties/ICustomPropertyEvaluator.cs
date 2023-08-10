@@ -39,6 +39,10 @@ namespace RHEAGROUP.DEHCSV.CustomProperties
         /// The subject <see cref="Thing"/> for which the property value needs to
         /// be evaluated
         /// </param>
+        /// <param name="propertyMap">
+        /// The <see cref="PropertyMap"/> that can be used to customize how the requested value
+        /// should be returned
+        /// </param>
         /// <param name="options">
         /// an object that may contain any kind of configuration that is required
         /// for the evaluation of the custom property. This may be a value property

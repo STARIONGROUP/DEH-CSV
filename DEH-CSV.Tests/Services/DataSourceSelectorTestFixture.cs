@@ -45,7 +45,7 @@ namespace RHEAGROUP.DEHCSV.Tests.Services
             this.loggerFactory = LoggerFactory.Create(builder =>
                 builder.AddConsole().SetMinimumLevel(LogLevel.Trace));
 
-            this.dataSourceSelector = new DataSourceSelector();
+            this.dataSourceSelector = new DataSourceSelector(this.loggerFactory);
         }
 
         [Test]

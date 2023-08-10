@@ -20,8 +20,8 @@
 
 namespace RHEAGROUP.DEHCSV.Tests.Mapping
 {
-    using System.Linq;
     using System.IO;
+    using System.Linq;
 
     using CDP4Common.CommonData;
 
@@ -39,8 +39,6 @@ namespace RHEAGROUP.DEHCSV.Tests.Mapping
     public class MappingProviderTestFixture 
     {
         private ILoggerFactory loggerFactory;
-
-        private ILogger<MappingProvider> logger;
 
         [SetUp]
         public void SetUp()

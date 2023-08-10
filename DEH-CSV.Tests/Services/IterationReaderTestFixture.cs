@@ -71,5 +71,30 @@ namespace RHEAGROUP.DEHCSV.Tests.Services
 
             Assert.That(iteration, Is.Not.Null);
         }
+
+        [Test]
+        public async Task Verify_that_iteration_read_throws_expected_exceptions()
+        {
+            var jsonFileDal = new CDP4JsonFileDal.JsonFileDal();
+
+            var path = Path.Combine(TestContext.CurrentContext.WorkDirectory, "Data", "demo-space.zip");
+
+            var uri = new Uri(path);
+
+            var credentials = new Credentials("admin", "pass", uri);
+
+            var session = new Session(jsonFileDal, credentials);
+
+            await session.Open(false);
+
+            Assert.That(async () => await this.iterationReader.Read(session, "XXX", 1, "SYS"),
+                Throws.Exception.With.Message.EqualTo("The EngineeringModelSetup with shortName XXX could not be found"));
+
+            Assert.That(async () => await this.iterationReader.Read(session, "DM_SPC", 12, "SYS"),
+                Throws.Exception.With.Message.EqualTo("The IterationSetup with number 12 could not be found"));
+
+            Assert.That(async () => await this.iterationReader.Read(session, "DM_SPC", 1, "SYE"),
+                Throws.Exception.With.Message.EqualTo("The DomainOfExpertise with shortName SYE could not be found"));
+        }
     }
 }
