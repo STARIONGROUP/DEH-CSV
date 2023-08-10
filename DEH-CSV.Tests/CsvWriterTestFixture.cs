@@ -94,7 +94,7 @@ namespace RHEAGROUP.DEHCSV.Tests
 
             var mapping = this.mappingProvider.QueryMappings(this.mappingPath);
 
-            Assert.That(() => this.csvWriter.Write(session.RetrieveSiteDirectory(), iteration, true,mapping, target, null), Throws.Nothing);
+            Assert.That(() => this.csvWriter.Write(iteration, true,mapping, target, null), Throws.Nothing);
         }
 
         [Test]
@@ -140,7 +140,7 @@ namespace RHEAGROUP.DEHCSV.Tests
             var outputPath = Path.Combine(TestContext.CurrentContext.WorkDirectory, "CSV");
             var target = new DirectoryInfo(outputPath);
 
-            Assert.That(() => this.csvWriter.Write(session.RetrieveSiteDirectory(), iteration,true, typeMaps, target, null), Throws.Nothing);
+            Assert.That(() => this.csvWriter.Write(iteration,true, typeMaps, target, null), Throws.Nothing);
         }
 
         [Test]

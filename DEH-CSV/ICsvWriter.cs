@@ -25,7 +25,6 @@ namespace RHEAGROUP.DEHCSV
 
     using CDP4Common.CommonData;
     using CDP4Common.EngineeringModelData;
-    using CDP4Common.SiteDirectoryData;
 
     using RHEAGROUP.DEHCSV.Mapping;
 
@@ -39,11 +38,10 @@ namespace RHEAGROUP.DEHCSV
         /// <summary>
         /// Writes an <see cref="Iteration"/> to a CSV file in the <paramref name="target"/>
         /// </summary>
-        /// <param name="siteDirectory">
-        /// The <see cref="SiteDirectory"/> top container
-        /// </param>
         /// <param name="iteration">
-        /// The <see cref="Iteration"/> that is to be written
+        /// The <see cref="Iteration"/> that is to be written. Please not that all <see cref="Thing"/>s
+        /// that are available in the <see cref="Iteration.Cache"/> can be written to the CSV. The
+        /// <see cref="Iteration"/> provides the entry point.
         /// </param>
         /// <param name="includeNestedElements">
         /// A value that indicates whether a volatile nested element tree needs to be generated 
@@ -63,6 +61,6 @@ namespace RHEAGROUP.DEHCSV
         /// of the interface implementation to verify that the options argument is
         /// of the correct type
         /// </param>
-        public void Write(SiteDirectory siteDirectory, Iteration iteration, bool includeNestedElements, IEnumerable<TypeMap> maps, DirectoryInfo target, object options);
+        public void Write(Iteration iteration, bool includeNestedElements, IEnumerable<TypeMap> maps, DirectoryInfo target, object options);
     }
 }
