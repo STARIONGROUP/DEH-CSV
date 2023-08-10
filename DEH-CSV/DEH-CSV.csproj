@@ -5,22 +5,30 @@
         <Description>ECSS-E-TM-10-25 to CSV converter</Description>
         <TargetFramework>netstandard2.0</TargetFramework>
         <PackageId>DEH-CSV</PackageId>
+        <PackageTags>CDP COMET ECSS-E-TM-10-25 CSV</PackageTags>
         <RootNamespace>RHEAGROUP.DEHCSV</RootNamespace>
         <Version>1.0.0</Version>
         <LangVersion>latest</LangVersion>
+        <IncludeSource>true</IncludeSource>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <PackageReleaseNotes>
             [Initial] Release
         </PackageReleaseNotes>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <PropertyGroup Label="Copyright">
         <Company>RHEA System S.A.</Company>
         <Copyright>Copyright 2023 RHEA System S.A.</Copyright>
         <Authors>Sam Gerené</Authors>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     </PropertyGroup>
 
     <PropertyGroup Label="Repository">
         <RepositoryType>Git</RepositoryType>
+        <PackageProjectUrl>https://github.com/RHEAGROUP/DEH-CSV</PackageProjectUrl>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
@@ -34,6 +42,10 @@
     <ItemGroup>
         <Folder Include="Mapping\" />
         <Folder Include="Properties\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
 </Project>
