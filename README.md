@@ -1,6 +1,6 @@
 # DEH-CSV
 
-A library that converts ECSS-E-TM-10-25 datasets into CSV
+The Digital Engineering Hub CSV **DEH-CSV** library is used to convert an ECSS-E-TM-10-25 data set into a CSV files.
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=RHEAGROUP_DEH-CSV&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=RHEAGROUP_DEH-CSV)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=RHEAGROUP_DEH-CSV&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=RHEAGROUP_DEH-CSV)
@@ -18,6 +18,24 @@ A library that converts ECSS-E-TM-10-25 datasets into CSV
 The packages are available on Nuget at https://www.nuget.org/packages/DEH-CSV/
 
 [![NuGet Badge](https://buildstats.info/nuget/DEH-CSV)](https://buildstats.info/nuget/DEH-CSV)
+
+## Quickstart
+
+  1. Install the nuget package into your project or solution. 
+  1. Add a mapping file that states how the properties of an ECSS-E-TM-10-25 [Thing](https://comet-dev-docs.mbsehub.org/) needs to be mapped to fields in a CSV file.
+  1. Use the [ICsvWriter](https://github.com/RHEAGROUP/DEH-CSV/blob/master/DEH-CSV/ICsvWriter.cs) interface and/or the [CsvWriter](https://github.com/RHEAGROUP/DEH-CSV/blob/master/DEH-CSV/CsvWriter.cs) class.
+
+The `ICsvWriter` interface exposes only one method: **write**.
+
+```
+ public void Write(Iteration iteration, bool includeNestedElements, IEnumerable<TypeMap> maps, DirectoryInfo target, object options);
+```
+
+  - iteration: Proive an `Iteration` instance that provides access to all the `Thing`s that need to be exported, this includes the container `EngineeringMoedel` and the `SiteDirectory`. 
+  - includeNestedElements: A value that indicates whether a volatile nested element tree needs to be generated for each `Option` in the provided `Iteration` and added to the `Thing` instances for which CSVs are to be written.
+  - maps:  a collection of `TypeMap`s that contain the configuration of how a certain kind of `Thing` is to be mapped to fields in a CSV file.
+  - target: the target directory where the CSV files are to be generated.
+  - options: any kind of `object` that can contain configuration information (this is igonred by the standard implementation but can be used when a derived CsvWriter is created where the `Write` method is overriden).
 
 ## Build Status
 
