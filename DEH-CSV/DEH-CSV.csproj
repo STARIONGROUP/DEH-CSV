@@ -8,13 +8,14 @@
         <PackageTags>CDP COMET ECSS-E-TM-10-25 CSV</PackageTags>
         <PackageIcon>cdp4-icon.png</PackageIcon>
         <RootNamespace>RHEAGROUP.DEHCSV</RootNamespace>
-        <Version>1.1.0</Version>
+        <Version>1.2.0</Version>
         <LangVersion>latest</LangVersion>
         <IncludeSource>true</IncludeSource>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <PackageReleaseNotes>
-            [Initial] Release
+            [Update] to CDP4-SDK version 24.4.0
+            [Update] to Logging.Abstractions version 8.0.0
         </PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
