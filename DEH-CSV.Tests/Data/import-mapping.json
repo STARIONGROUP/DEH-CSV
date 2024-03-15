@@ -1,0 +1,162 @@
+[
+  {
+    "classKind": "ElementDefinition",
+    "properties": [
+      {
+        "source": "Short name",
+        "classKind": "ElementDefinition",
+        "search": "ShortName",
+        "isIdentifierProperty": true,
+        "target": "ShortName"
+      },
+      {
+        "source": "Category",
+        "searchClassKind": "Category",
+        "search": "Name",
+        "target": "Category[0..*]"
+      },
+      {
+        "source": "Name",
+        "target": "Name"
+      },
+      {
+        "source": "Ownership",
+        "searchClassKind": "DomainOfExpertise",
+        "search": "Name",
+        "target": "Owner"
+      }
+    ]
+  },
+  {
+    "classKind": "Parameter",
+    "properties": [
+      {
+        "source": "Short name",
+        "classKind": "ElementDefinition",
+        "search": "ShortName",
+        "isIdentifierProperty": true
+      },
+      {
+        "source": "area",
+        "classKind": "Parameter",
+        "search": "ParameterType.Name",
+        "isIdentifierProperty": true,
+        "searchBasedOnHeader": true,
+        "path": "Parameter[0..*]",
+        "target": "ParameterType",
+        "searchClassKind": "DerivedQuantityKind"
+      },
+      {
+        "source": "mass",
+        "classKind": "Parameter",
+        "search": "ParameterType.Name",
+        "isIdentifierProperty": true,
+        "searchBasedOnHeader": true,
+        "path": "Parameter[0..*]",
+        "target": "ParameterType",
+        "searchClassKind": "SimpleQuantityKind"
+      },
+      {
+        "source": "dry mass",
+        "classKind": "Parameter",
+        "search": "ParameterType.Name",
+        "isIdentifierProperty": true,
+        "searchBasedOnHeader": true,
+        "path": "Parameter[0..*]",
+        "target": "ParameterType",
+        "searchClassKind": "SpecializedQuantityKind"
+      },
+      {
+        "source": "radius",
+        "classKind": "Parameter",
+        "search": "ParameterType.Name",
+        "isIdentifierProperty": true,
+        "searchBasedOnHeader": true,
+        "path": "Parameter[0..*]",
+        "target": "ParameterType",
+        "searchClassKind": "SpecializedQuantityKind"
+      },
+      {
+        "source": "Ownership",
+        "searchClassKind": "DomainOfExpertise",
+        "search": "Name",
+        "target": "Owner"
+      }
+    ]
+  },
+  {
+    "classKind": "ParameterValueSet",
+    "properties": [
+      {
+        "source": "Short name",
+        "classKind": "ElementDefinition",
+        "search": "ShortName",
+        "isIdentifierProperty": true
+      },
+      {
+        "source": "area",
+        "classKind": "Parameter",
+        "search": "ParameterType.Name",
+        "isIdentifierProperty": true,
+        "searchBasedOnHeader": true,
+        "path": "Parameter[0..*]"
+      },
+      {
+        "source": "area",
+        "classKind": "ParameterValueSet",
+        "isIdentifierProperty": true,
+        "path": "Parameter[0..*].ValueSet[0..*]",
+        "target": "Manual",
+        "firstOrDefault": true
+      },
+      {
+        "source": "mass",
+        "classKind": "Parameter",
+        "search": "ParameterType.Name",
+        "isIdentifierProperty": true,
+        "searchBasedOnHeader": true,
+        "path": "Parameter[0..*]"
+      },
+      {
+        "source": "mass",
+        "classKind": "ParameterValueSet",
+        "isIdentifierProperty": true,
+        "path": "Parameter[0..*].ValueSet[0..*]",
+        "target": "Manual",
+        "firstOrDefault": true
+      },
+      {
+        "source": "dry mass",
+        "classKind": "Parameter",
+        "search": "ParameterType.Name",
+        "isIdentifierProperty": true,
+        "searchBasedOnHeader": true,
+        "path": "Parameter[0..*]"
+      },
+      {
+        "source": "dry mass",
+        "classKind": "ParameterValueSet",
+        "isIdentifierProperty": true,
+        "path": "Parameter[0..*].ValueSet[0..*]",
+        "target": "Manual",
+        "firstOrDefault": true
+      },
+      {
+        "source": "radius",
+        "classKind": "Parameter",
+        "search": "ParameterType.Name",
+        "isIdentifierProperty": true,
+        "searchBasedOnHeader": true,
+        "path": "Parameter[0..*]"
+      },
+      {
+        "source": "radius",
+        "classKind": "ParameterValueSet",
+        "isIdentifierProperty": true,
+        "path": "Parameter[0..*].ValueSet[0..*]",
+        "target": "Manual",
+        "firstOrDefault": true
+      }
+    ]
+  }
+]

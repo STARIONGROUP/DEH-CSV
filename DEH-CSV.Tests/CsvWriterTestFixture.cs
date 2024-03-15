@@ -54,6 +54,7 @@ namespace RHEAGROUP.DEHCSV.Tests
         private Uri uri;
 
         private string mappingPath;
+        private CDPMessageBus messageBus;
 
         [SetUp]
         public void SetUp()
@@ -66,8 +67,14 @@ namespace RHEAGROUP.DEHCSV.Tests
             this.mappingProvider = new MappingProvider(this.loggerFactory);
 
             this.iterationReader = new IterationReader(this.loggerFactory);
-
+            this.messageBus = new CDPMessageBus();
             this.csvWriter = new CsvWriter(this.loggerFactory);
+        }
+
+        [TearDown]
+        public void Teardown()
+        {
+            this.messageBus.Dispose();
         }
 
         [Test]
@@ -80,8 +87,8 @@ namespace RHEAGROUP.DEHCSV.Tests
             this.uri = new Uri(path);
 
             var credentials = new Credentials("admin", "pass", uri);
-
-            var session = new Session(jsonFileDal, credentials);
+            
+            var session = new Session(jsonFileDal, credentials, this.messageBus);
 
             await session.Open(false);
 
@@ -106,7 +113,7 @@ namespace RHEAGROUP.DEHCSV.Tests
 
             var credentials = new Credentials("admin", "pass", uri);
 
-            var session = new Session(jsonFileDal, credentials);
+            var session = new Session(jsonFileDal, credentials, this.messageBus);
 
             await session.Open(false);
 

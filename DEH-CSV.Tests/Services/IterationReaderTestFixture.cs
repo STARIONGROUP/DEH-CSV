@@ -42,6 +42,7 @@ namespace RHEAGROUP.DEHCSV.Tests.Services
         private ILoggerFactory loggerFactory;
 
         private IterationReader iterationReader;
+        private CDPMessageBus messageBus;
 
         [SetUp]
         public void SetUp()
@@ -50,6 +51,14 @@ namespace RHEAGROUP.DEHCSV.Tests.Services
                 builder.AddConsole().SetMinimumLevel(LogLevel.Trace));
             
             this.iterationReader = new IterationReader(this.loggerFactory);
+
+            this.messageBus = new CDPMessageBus();
+        }
+
+        [TearDown]
+        public void Teardown()
+        {
+            this.messageBus.Dispose();
         }
 
         [Test]
@@ -63,7 +72,7 @@ namespace RHEAGROUP.DEHCSV.Tests.Services
 
             var credentials = new Credentials("admin", "pass", uri);
 
-            var session = new Session(jsonFileDal, credentials);
+            var session = new Session(jsonFileDal, credentials, this.messageBus);
 
             await session.Open(false);
 
@@ -83,7 +92,7 @@ namespace RHEAGROUP.DEHCSV.Tests.Services
 
             var credentials = new Credentials("admin", "pass", uri);
 
-            var session = new Session(jsonFileDal, credentials);
+            var session = new Session(jsonFileDal, credentials, this.messageBus);
 
             await session.Open(false);
 
