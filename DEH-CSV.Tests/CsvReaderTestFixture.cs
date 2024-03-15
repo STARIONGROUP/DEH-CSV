@@ -1,7 +1,7 @@
 ﻿// -------------------------------------------------------------------------------------------------
 //  <copyright file="CsvReaderTestFixture.cs" company="RHEA System S.A.">
 // 
-//    Copyright 2023 RHEA System S.A.
+//    Copyright 2023-2024 RHEA System S.A.
 // 
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -50,14 +50,14 @@ namespace RHEAGROUP.DEHCSV.Tests
     [TestFixture]
     public class CsvReaderTestFixture
     {
-        private readonly Uri uri = new ("https://cdp4services-public.cdp4.org");
+        private readonly Uri uri = new("https://cdp4services-public.cdp4.org");
         private Credentials credentials;
         private CdpServicesDal dal;
         private CDPMessageBus messageBus;
         private Session session;
         private CsvReader csvReader;
         private JsonSerializerOptions options;
-        
+
         [SetUp]
         public void Setup()
         {
@@ -86,7 +86,7 @@ namespace RHEAGROUP.DEHCSV.Tests
         public async Task VerifyCsvReaderImplementation()
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
-            
+
             var csvPath = Path.Combine(TestContext.CurrentContext.WorkDirectory, "Data", "import-data.csv");
             var mappingFunctionPath = Path.Combine(TestContext.CurrentContext.WorkDirectory, "Data", "import-mapping.json");
 
@@ -139,7 +139,7 @@ namespace RHEAGROUP.DEHCSV.Tests
                     Assert.That(elementDefinition.Parameter[1].ParameterType.Name, Is.EqualTo("mass"));
                     Assert.That(elementDefinition.Parameter[2].ParameterType.Name, Is.EqualTo("dry mass"));
                     Assert.That(elementDefinition.Parameter[3].ParameterType.Name, Is.EqualTo("radius"));
-                    Assert.That(elementDefinition.Parameter.Select(x => x.Owner).Distinct(), Is.EquivalentTo(new List<DomainOfExpertise>{elementDefinition.Owner}));
+                    Assert.That(elementDefinition.Parameter.Select(x => x.Owner).Distinct(), Is.EquivalentTo(new List<DomainOfExpertise> { elementDefinition.Owner }));
                 });
 
                 foreach (var parameter in elementDefinition.Parameter)
@@ -149,8 +149,8 @@ namespace RHEAGROUP.DEHCSV.Tests
 
                 Assert.That(int.Parse(elementDefinition.Parameter[0].ValueSet[0].Manual[0]), Is.EqualTo(count));
                 Assert.That(int.Parse(elementDefinition.Parameter[1].ValueSet[0].Manual[0]), Is.EqualTo(-count));
-                Assert.That(int.Parse(elementDefinition.Parameter[2].ValueSet[0].Manual[0]), Is.EqualTo(count+10));
-                Assert.That(int.Parse(elementDefinition.Parameter[3].ValueSet[0].Manual[0]), Is.EqualTo(count+100));
+                Assert.That(int.Parse(elementDefinition.Parameter[2].ValueSet[0].Manual[0]), Is.EqualTo(count + 10));
+                Assert.That(int.Parse(elementDefinition.Parameter[3].ValueSet[0].Manual[0]), Is.EqualTo(count + 100));
 
                 count++;
             }

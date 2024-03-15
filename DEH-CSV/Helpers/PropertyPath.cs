@@ -1,7 +1,7 @@
 ﻿// -------------------------------------------------------------------------------------------------
 //  <copyright file="PropertyPath.cs" company="RHEA System S.A.">
 // 
-//    Copyright 2023 RHEA System S.A.
+//    Copyright 2023-2024 RHEA System S.A.
 // 
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -111,12 +111,12 @@ namespace RHEAGROUP.DEHCSV.Helpers
             if (nextProperties.Count == 1)
             {
                 var (descriptor, map) = nextProperties[0];
-                this.Children = new List<PropertyPath> { new (descriptor, map, allProperties) };
+                this.Children = new List<PropertyPath> { new(descriptor, map, allProperties) };
             }
             else
             {
                 var propertiesWithSameSource = nextProperties.Where(x => x.Map.Source == this.PropertyMap.Source).ToList();
-                var collectionToUseForChildren = propertiesWithSameSource.Count == 0 ? nextProperties : propertiesWithSameSource; 
+                var collectionToUseForChildren = propertiesWithSameSource.Count == 0 ? nextProperties : propertiesWithSameSource;
                 this.Children = new List<PropertyPath>(collectionToUseForChildren.Select(x => new PropertyPath(x.Descriptor, x.Map, allProperties)));
             }
         }

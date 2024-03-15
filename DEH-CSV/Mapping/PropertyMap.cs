@@ -1,7 +1,7 @@
-﻿//  -------------------------------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------------------------------
 //  <copyright file="PropertyMap.cs" company="RHEA System S.A.">
 // 
-//    Copyright 2023 RHEA System S.A.
+//    Copyright 2023-2024 RHEA System S.A.
 // 
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -58,7 +58,7 @@ namespace RHEAGROUP.DEHCSV.Mapping
         /// for a thing to be created
         /// </summary>
         public bool IsIdentifierProperty { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the path to find Thing(s)
         /// </summary>
