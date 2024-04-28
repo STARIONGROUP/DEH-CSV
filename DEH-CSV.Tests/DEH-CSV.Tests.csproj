@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup Label="Copyright">
-        <Company>RHEA System S.A.</Company>
+        <Company>Starion Group S.A.</Company>
         <Authors>Sam Gerené</Authors>
-        <Copyright>Copyright 2023 RHEA System S.A.</Copyright>
+        <Copyright>Copyright 2023-2024 Starion Group S.A.</Copyright>
     </PropertyGroup>
 
     <PropertyGroup Label="Package">
-        <Description>Nunit test suite for the RHEAGROUP.DEHCSV library</Description>
+        <Description>Nunit test suite for the STARIONGROUP.DEHCSV library</Description>
         <TargetFramework>net8.0</TargetFramework>
-        <RootNamespace>RHEAGROUP.DEHCSV.Tests</RootNamespace>
+        <RootNamespace>STARIONGROUP.DEHCSV.Tests</RootNamespace>
         <ImplicitUsings>false</ImplicitUsings>
         <Nullable>disable</Nullable>
         <IsPackable>false</IsPackable>

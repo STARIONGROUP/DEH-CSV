@@ -1,7 +1,7 @@
 ﻿//  -------------------------------------------------------------------------------------------------
-//  <copyright file="CsvWriter.cs" company="RHEA System S.A.">
+//  <copyright file="CsvWriter.cs" company="Starion Group S.A.">
 // 
-//    Copyright 2023 RHEA System S.A.
+//    Copyright 2023-2024 Starion Group S.A.
 // 
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 //  </copyright>
 //  -------------------------------------------------------------------------------------------------
 
-namespace RHEAGROUP.DEHCSV
+namespace STARIONGROUP.DEHCSV
 {
     using System;
     using System.Collections.Generic;
@@ -35,8 +35,8 @@ namespace RHEAGROUP.DEHCSV
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Logging.Abstractions;
 
-    using RHEAGROUP.DEHCSV.CustomProperties;
-    using RHEAGROUP.DEHCSV.Mapping;
+    using  STARIONGROUP.DEHCSV.CustomProperties;
+    using  STARIONGROUP.DEHCSV.Mapping;
 
     /// <summary>
     /// The purpose of the <see cref="CsvWriter"/> is to write CSV files based on the provided

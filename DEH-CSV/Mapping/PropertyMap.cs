@@ -1,7 +1,7 @@
 ﻿// -------------------------------------------------------------------------------------------------
-//  <copyright file="PropertyMap.cs" company="RHEA System S.A.">
+//  <copyright file="PropertyMap.cs" company="Starion Group S.A.">
 // 
-//    Copyright 2023-2024 RHEA System S.A.
+//    Copyright 2023-2024 Starion Group S.A.
 // 
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 //  </copyright>
 //  -------------------------------------------------------------------------------------------------
 
-namespace RHEAGROUP.DEHCSV.Mapping
+namespace STARIONGROUP.DEHCSV.Mapping
 {
     using CDP4Common.CommonData;
 

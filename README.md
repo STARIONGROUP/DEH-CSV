@@ -2,16 +2,16 @@
 
 The Digital Engineering Hub CSV **DEH-CSV** library is used to convert an ECSS-E-TM-10-25 data set into a CSV files.
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=RHEAGROUP_DEH-CSV&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=RHEAGROUP_DEH-CSV)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=RHEAGROUP_DEH-CSV&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=RHEAGROUP_DEH-CSV)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=RHEAGROUP_DEH-CSV&metric=coverage)](https://sonarcloud.io/summary/new_code?id=RHEAGROUP_DEH-CSV)
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=RHEAGROUP_DEH-CSV&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=RHEAGROUP_DEH-CSV)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=RHEAGROUP_DEH-CSV&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=RHEAGROUP_DEH-CSV)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=RHEAGROUP_DEH-CSV&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=RHEAGROUP_DEH-CSV)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=RHEAGROUP_DEH-CSV&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=RHEAGROUP_DEH-CSV)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=RHEAGROUP_DEH-CSV&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=RHEAGROUP_DEH-CSV)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=RHEAGROUP_DEH-CSV&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=RHEAGROUP_DEH-CSV)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=RHEAGROUP_DEH-CSV&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=RHEAGROUP_DEH-CSV)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=STARIONGROUP_DEH-CSV&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=STARIONGROUP_DEH-CSV)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=STARIONGROUP_DEH-CSV&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=STARIONGROUP_DEH-CSV)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=STARIONGROUP_DEH-CSV&metric=coverage)](https://sonarcloud.io/summary/new_code?id=STARIONGROUP_DEH-CSV)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=STARIONGROUP_DEH-CSV&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=STARIONGROUP_DEH-CSV)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=STARIONGROUP_DEH-CSV&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=STARIONGROUP_DEH-CSV)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=STARIONGROUP_DEH-CSV&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=STARIONGROUP_DEH-CSV)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=STARIONGROUP_DEH-CSV&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=STARIONGROUP_DEH-CSV)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=STARIONGROUP_DEH-CSV&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=STARIONGROUP_DEH-CSV)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=STARIONGROUP_DEH-CSV&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=STARIONGROUP_DEH-CSV)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=STARIONGROUP_DEH-CSV&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=STARIONGROUP_DEH-CSV)
 
 ## Installation
 
@@ -26,7 +26,7 @@ The packages are available on Nuget at https://www.nuget.org/packages/DEH-CSV/
 ### Write
 
   1. Add a mapping file that states how the properties of an ECSS-E-TM-10-25 [Thing](https://comet-dev-docs.mbsehub.org/) needs to be mapped to fields in a CSV file.
-  1. Use the [ICsvWriter](https://github.com/RHEAGROUP/DEH-CSV/blob/master/DEH-CSV/ICsvWriter.cs) interface and/or the [CsvWriter](https://github.com/RHEAGROUP/DEH-CSV/blob/master/DEH-CSV/CsvWriter.cs) class.
+  1. Use the [ICsvWriter](https://github.com/STARIONGROUP/DEH-CSV/blob/master/DEH-CSV/ICsvWriter.cs) interface and/or the [CsvWriter](https://github.com/STARIONGROUP/DEH-CSV/blob/master/DEH-CSV/CsvWriter.cs) class.
 
 The `ICsvWriter` interface exposes only one method: **write**.
 
@@ -44,7 +44,7 @@ The `ICsvWriter` interface exposes only one method: **write**.
 
   1. Add a mapping file that states of a CSV file needs to be mapped to the properties of an ECSS-E-TM-10-25 [Thing](https://comet-dev-docs.mbsehub.org/)
   1. Add the corresponding CSV file that needs to be processed
-  1. Use the [ICsvReader](https://github.com/RHEAGROUP/DEH-CSV/blob/development/DEH-CSV/ICsvReader.cs) interface and/or the [CsvReader](https://github.com/RHEAGROUP/DEH-CSV/blob/development/DEH-CSV/CsvReader.cs) class.
+  1. Use the [ICsvReader](https://github.com/STARIONGROUP/DEH-CSV/blob/development/DEH-CSV/ICsvReader.cs) interface and/or the [CsvReader](https://github.com/STARIONGROUP/DEH-CSV/blob/development/DEH-CSV/CsvReader.cs) class.
 
  The `ICsvReader` interface exposes only one method: **read**.
 
@@ -65,8 +65,8 @@ GitHub actions are used to build and test the libraries
 
 Branch | Build Status
 ------- | :------------
-Master | ![Build Status](https://github.com/RHEAGROUP/DEH-CSV/actions/workflows/CodeQuality.yml/badge.svg?branch=master)
-Development | ![Build Status](https://github.com/RHEAGROUP/DEH-CSV/actions/workflows/CodeQuality.yml/badge.svg?branch=development)
+Master | ![Build Status](https://github.com/STARIONGROUP/DEH-CSV/actions/workflows/CodeQuality.yml/badge.svg?branch=master)
+Development | ![Build Status](https://github.com/STARIONGROUP/DEH-CSV/actions/workflows/CodeQuality.yml/badge.svg?branch=development)
 
 # License
 

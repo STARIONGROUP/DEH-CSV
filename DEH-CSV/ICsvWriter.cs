@@ -1,7 +1,7 @@
 ﻿//  -------------------------------------------------------------------------------------------------
-//  <copyright file="ICsvWriter.cs" company="RHEA System S.A.">
+//  <copyright file="ICsvWriter.cs" company="Starion Group S.A.">
 // 
-//    Copyright 2023 RHEA System S.A.
+//    Copyright 2023-2024 Starion Group S.A.
 // 
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 //  </copyright>
 //  -------------------------------------------------------------------------------------------------
 
-namespace RHEAGROUP.DEHCSV
+namespace STARIONGROUP.DEHCSV
 {
     using System.Collections.Generic;
     using System.IO;
@@ -26,7 +26,7 @@ namespace RHEAGROUP.DEHCSV
     using CDP4Common.CommonData;
     using CDP4Common.EngineeringModelData;
 
-    using RHEAGROUP.DEHCSV.Mapping;
+    using  STARIONGROUP.DEHCSV.Mapping;
 
     /// <summary>
     /// The purpose of the <see cref="ICsvWriter"/> is to write CSV files based on the provided

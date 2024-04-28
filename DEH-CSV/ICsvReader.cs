@@ -1,7 +1,7 @@
 ﻿// -------------------------------------------------------------------------------------------------
-//  <copyright file="ICsvReader.cs" company="RHEA System S.A.">
+//  <copyright file="ICsvReader.cs" company="Starion Group S.A.">
 // 
-//    Copyright 2023 RHEA System S.A.
+//    Copyright 2023-2024 Starion Group S.A.
 // 
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 //  </copyright>
 //  -------------------------------------------------------------------------------------------------
 
-namespace RHEAGROUP.DEHCSV
+namespace STARIONGROUP.DEHCSV
 {
     using System.Collections.Generic;
     using System.IO;
@@ -28,7 +28,7 @@ namespace RHEAGROUP.DEHCSV
 
     using CDP4Dal;
 
-    using RHEAGROUP.DEHCSV.Mapping;
+    using  STARIONGROUP.DEHCSV.Mapping;
 
     /// <summary>
     /// The purpose of the <see cref="ICsvReader" /> is to read CSV files and transform the content to

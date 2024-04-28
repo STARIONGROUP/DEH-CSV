@@ -1,7 +1,7 @@
 ﻿//  -------------------------------------------------------------------------------------------------
-//  <copyright file="DataSourceSelectorTestFixture.cs" company="RHEA System S.A.">
+//  <copyright file="DataSourceSelectorTestFixture.cs" company="Starion Group S.A.">
 // 
-//    Copyright 2023 RHEA System S.A.
+//    Copyright 2023-2024 Starion Group S.A.
 // 
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 //  </copyright>
 //  -------------------------------------------------------------------------------------------------
 
-namespace RHEAGROUP.DEHCSV.Tests.Services
+namespace STARIONGROUP.DEHCSV.Tests.Services
 {
     using System;
     using System.IO;
@@ -27,7 +27,7 @@ namespace RHEAGROUP.DEHCSV.Tests.Services
 
     using NUnit.Framework;
 
-    using RHEAGROUP.DEHCSV.Services;
+    using  STARIONGROUP.DEHCSV.Services;
 
     /// <summary>
     /// Suite of tests for the <see cref="DataSourceSelector"/> class
@@ -78,7 +78,7 @@ namespace RHEAGROUP.DEHCSV.Tests.Services
         [Test]
         public void verify_that_when_an_unsupported_uri_is_provided_an_excetion_is_thrown()
         {
-            var uri = new Uri("atom://www.rheagroup.com");
+            var uri = new Uri("atom://www.stariongroup.eu");
 
             Assert.That(() => this.dataSourceSelector.Select(uri), Throws.TypeOf<ArgumentException>()
                 .With.Message.EqualTo("The URI scheme is not supported: atom"));

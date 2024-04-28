@@ -1,8 +1,8 @@
 ### Prerequisites
 
 - [ ] I have written a descriptive pull-request title
-- [ ] I have verified that there are no overlapping [pull-requests](https://github.com/RHEAGROUP/DEH-CSV/pulls) open
-- [ ] I have verified that I am following the DEH-CSV [code style guidelines](https://raw.githubusercontent.com/RHEAGROUP/DEH-CSV/master/.github/CONTRIBUTING.md)
+- [ ] I have verified that there are no overlapping [pull-requests](https://github.com/STARIONGROUP/DEH-CSV/pulls) open
+- [ ] I have verified that I am following the DEH-CSV [code style guidelines](https://raw.githubusercontent.com/STARIONGROUP/DEH-CSV/master/.github/CONTRIBUTING.md)
 - [ ] I have provided test coverage for my change (where applicable)
 
 ### Description

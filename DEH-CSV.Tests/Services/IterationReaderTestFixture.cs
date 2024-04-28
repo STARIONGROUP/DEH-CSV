@@ -1,7 +1,7 @@
 ﻿//  -------------------------------------------------------------------------------------------------
-//  <copyright file="IterationReaderTestFixture.cs" company="RHEA System S.A.">
+//  <copyright file="IterationReaderTestFixture.cs" company="Starion Group S.A.">
 // 
-//    Copyright 2023 RHEA System S.A.
+//    Copyright 2023-2024 Starion Group S.A.
 // 
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 //  </copyright>
 //  -------------------------------------------------------------------------------------------------
 
-namespace RHEAGROUP.DEHCSV.Tests.Services
+namespace STARIONGROUP.DEHCSV.Tests.Services
 {
     using System;
     using System.IO;
@@ -31,7 +31,7 @@ namespace RHEAGROUP.DEHCSV.Tests.Services
 
     using NUnit.Framework;
 
-    using RHEAGROUP.DEHCSV.Services;
+    using  STARIONGROUP.DEHCSV.Services;
 
     /// <summary>
     /// Suite of tests for the <see cref="IterationReader"/> class

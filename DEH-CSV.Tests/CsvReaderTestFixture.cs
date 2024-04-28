@@ -1,7 +1,7 @@
 ﻿// -------------------------------------------------------------------------------------------------
-//  <copyright file="CsvReaderTestFixture.cs" company="RHEA System S.A.">
+//  <copyright file="CsvReaderTestFixture.cs" company="Starion Group S.A.">
 // 
-//    Copyright 2023-2024 RHEA System S.A.
+//    Copyright 2023-2024 Starion Group S.A.
 // 
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 //  </copyright>
 //  -------------------------------------------------------------------------------------------------
 
-namespace RHEAGROUP.DEHCSV.Tests
+namespace STARIONGROUP.DEHCSV.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -43,7 +43,7 @@ namespace RHEAGROUP.DEHCSV.Tests
 
     using NUnit.Framework;
 
-    using RHEAGROUP.DEHCSV.Mapping;
+    using  STARIONGROUP.DEHCSV.Mapping;
 
     using File = System.IO.File;
 

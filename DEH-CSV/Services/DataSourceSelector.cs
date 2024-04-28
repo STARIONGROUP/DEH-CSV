@@ -1,7 +1,7 @@
 ﻿//  -------------------------------------------------------------------------------------------------
-//  <copyright file="DataSourceSelector.cs" company="RHEA System S.A.">
+//  <copyright file="DataSourceSelector.cs" company="Starion Group S.A.">
 // 
-//    Copyright 2023 RHEA System S.A.
+//    Copyright 2023-2024 Starion Group S.A.
 // 
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 //  </copyright>
 //  -------------------------------------------------------------------------------------------------
 
-namespace RHEAGROUP.DEHCSV.Services
+namespace STARIONGROUP.DEHCSV.Services
 {
     using System;
 

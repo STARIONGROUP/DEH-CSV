@@ -1,7 +1,7 @@
 ﻿//  -------------------------------------------------------------------------------------------------
-//  <copyright file="MappingProviderTestFixture.cs" company="RHEA System S.A.">
+//  <copyright file="MappingProviderTestFixture.cs" company="Starion Group S.A.">
 // 
-//    Copyright 2023 RHEA System S.A.
+//    Copyright 2023-2024 Starion Group S.A.
 // 
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 //  </copyright>
 //  -------------------------------------------------------------------------------------------------
 
-namespace RHEAGROUP.DEHCSV.Tests.Mapping
+namespace STARIONGROUP.DEHCSV.Tests.Mapping
 {
     using System.IO;
     using System.Linq;
@@ -29,8 +29,8 @@ namespace RHEAGROUP.DEHCSV.Tests.Mapping
 
     using NUnit.Framework;
 
-    using RHEAGROUP.DEHCSV.Mapping;
-    using RHEAGROUP.DEHCSV.Services;
+    using  STARIONGROUP.DEHCSV.Mapping;
+    using  STARIONGROUP.DEHCSV.Services;
 
     /// <summary>
     /// Suite of tests for the <see cref="DataSourceSelector"/> class

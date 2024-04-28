@@ -1,7 +1,7 @@
 ﻿//  -------------------------------------------------------------------------------------------------
-//  <copyright file="ThingTimeStampedCSVWriterTestFixture.cs" company="RHEA System S.A.">
+//  <copyright file="ThingTimeStampedCSVWriterTestFixture.cs" company="Starion Group S.A.">
 // 
-//    Copyright 2023 RHEA System S.A.
+//    Copyright 2023-2024 Starion Group S.A.
 // 
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 //  </copyright>
 //  -------------------------------------------------------------------------------------------------
 
-namespace RHEAGROUP.DEHCSV.Tests.CustomProperties
+namespace STARIONGROUP.DEHCSV.Tests.CustomProperties
 {
     using System;
     using System.Collections.Generic;
@@ -34,9 +34,9 @@ namespace RHEAGROUP.DEHCSV.Tests.CustomProperties
 
     using NUnit.Framework;
 
-    using RHEAGROUP.DEHCSV.CustomProperties;
-    using RHEAGROUP.DEHCSV.Mapping;
-    using RHEAGROUP.DEHCSV.Services;
+    using  STARIONGROUP.DEHCSV.CustomProperties;
+    using  STARIONGROUP.DEHCSV.Mapping;
+    using  STARIONGROUP.DEHCSV.Services;
 
     /// <summary>
     /// Suite of tests for the <see cref="ThingTimeStampedCSVWriter"/> class
