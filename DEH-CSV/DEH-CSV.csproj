@@ -35,7 +35,7 @@
     <PackageReference Include="CDP4ServicesDal-CE" Version="26.6.2" />
     <PackageReference Include="CsvHelper" Version="32.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
-    <PackageReference Include="System.Text.Json" Version="8.0.3" />
+    <PackageReference Include="System.Text.Json" Version="8.0.4" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\cdp4-icon.png" Pack="true" PackagePath="\" />
