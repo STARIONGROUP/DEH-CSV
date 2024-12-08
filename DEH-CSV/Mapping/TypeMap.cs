@@ -42,6 +42,6 @@ namespace STARIONGROUP.DEHCSV.Mapping
         /// <summary>
         /// Gets or sets the <see cref="PropertyMap"/>s
         /// </summary>
-        public List<PropertyMap> Properties { get; set; } = new List<PropertyMap>();
+        public List<PropertyMap> Properties { get; set; } = [];
     }
 }

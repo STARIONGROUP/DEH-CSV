@@ -73,8 +73,44 @@ namespace STARIONGROUP.DEHCSV
         /// <returns>A <see cref="Task{T}" /> that returns a collection of mapped <see cref="Thing" />s</returns>
         public async Task<IEnumerable<Thing>> ReadAsync(Stream stream, IReadOnlyCollection<TypeMap> typeMaps, ISession session)
         {
-            ValidateReadParameters(stream, typeMaps, session);
+            if (stream == null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
 
+            if (typeMaps == null)
+            {
+                throw new ArgumentNullException(nameof(typeMaps));
+            }
+
+            if (session == null)
+            {
+                throw new ArgumentNullException(nameof(session));
+            }
+
+            if (typeMaps.Count == 0)
+            {
+                throw new ArgumentException("The provided collection of TypeMap is empty", nameof(typeMaps));
+            }
+
+            if (typeMaps.SelectMany(x => x.Properties).Any(x => x.IsIdentifierProperty && !x.ClassKind.HasValue))
+            {
+                throw new InvalidDataException("One of the IdentifierProperty do not specify the ClassKind to query");
+            }
+
+            return await this.ReadInternalAsync(stream, typeMaps, session);
+        }
+
+        /// <summary>
+        /// Reads the CSV content of the <see cref="Stream" /> and maps it to <see cref="Thing" />s based on the provided collection of
+        /// <see cref="TypeMap" />s
+        /// </summary>
+        /// <param name="stream">The <see cref="Stream" /> that contains CSV content</param>
+        /// <param name="typeMaps">The collection of <see cref="TypeMap" />s</param>
+        /// <param name="session">The <see cref="ISession" /> that helps to retrieve <see cref="Thing" /></param>
+        /// <returns>A <see cref="Task{T}" /> that returns a collection of mapped <see cref="Thing" />s</returns>
+        private async Task<IEnumerable<Thing>> ReadInternalAsync(Stream stream, IReadOnlyCollection<TypeMap> typeMaps, ISession session)
+        {
             var things = new List<Thing>();
 
             var accessibleThings = session.Assembler.Cache
@@ -452,42 +488,6 @@ namespace STARIONGROUP.DEHCSV
             {
                 this.logger.LogError("The provided CSV does not contains any header for the source {0}", invalidPropertyMap.Source);
                 throw new InvalidDataException($"The provided CSV does not contains any header for the source {invalidPropertyMap.Source}");
-            }
-        }
-
-        /// <summary>
-        /// Validates all parameters provided for the <see cref="ReadAsync" /> method
-        /// </summary>
-        /// <param name="stream">The provided <see cref="Stream" /></param>
-        /// <param name="typeMaps">The provided collection of <see cref="TypeMap" />s</param>
-        /// <param name="session">The provided <see cref="ISession" /></param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        private static void ValidateReadParameters(Stream stream, IReadOnlyCollection<TypeMap> typeMaps, ISession session)
-        {
-            if (stream == null)
-            {
-                throw new ArgumentNullException(nameof(stream));
-            }
-
-            if (typeMaps == null)
-            {
-                throw new ArgumentNullException(nameof(typeMaps));
-            }
-
-            if (session == null)
-            {
-                throw new ArgumentNullException(nameof(session));
-            }
-
-            if (typeMaps.Count == 0)
-            {
-                throw new ArgumentException("The provided collection of TypeMap is empty", nameof(typeMaps));
-            }
-
-            if (typeMaps.SelectMany(x => x.Properties).Any(x => x.IsIdentifierProperty && !x.ClassKind.HasValue))
-            {
-                throw new InvalidDataException("One of the IdentifierProperty do not specify the ClassKind to query");
             }
         }
 

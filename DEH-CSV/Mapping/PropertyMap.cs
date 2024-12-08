@@ -28,7 +28,7 @@ namespace STARIONGROUP.DEHCSV.Mapping
     public class PropertyMap
     {
         /// <summary>
-        /// Gets or sets the source property name on the ECSS-E-TM-10-25 class in case of the mapping from ECSS-E-TM10-25 to CSV.
+        /// Gets or sets the source property name on the ECSS-E-TM-10-25 class in case of the mapping from ECSS-E-TM-10-25 to CSV.
         /// Gets or sets the column name of the CSV to use to retrieve a value
         /// </summary>
         public string Source { get; set; }

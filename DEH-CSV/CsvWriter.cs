@@ -94,6 +94,11 @@ namespace STARIONGROUP.DEHCSV
                 throw new ArgumentNullException(nameof(iteration));
             }
 
+            if (maps == null)
+            {
+                throw new ArgumentNullException(nameof(maps));
+            }
+
             var things = iteration.Cache.Select(item => item.Value.Value).ToList();
 
             if (includeNestedElements)
@@ -134,6 +139,13 @@ namespace STARIONGROUP.DEHCSV
         /// </param>
         /// <param name="target">
         /// The target <see cref="DirectoryInfo"/> to which the CSV file is to be written
+        /// </param>
+        /// <param name="options">
+        /// an object that may contain any kind of configuration that is required
+        /// for the evaluation of the custom property. This may be a value property
+        /// such as a string or int or a complex object. It is the responsibility
+        /// of the interface implementation to verify that the options argument is
+        /// of the correct type
         /// </param>
         public virtual void Write(IEnumerable<Thing> things, TypeMap typeMap, DirectoryInfo target, object options)
         {
@@ -257,6 +269,16 @@ namespace STARIONGROUP.DEHCSV
         /// </param>
         protected void WriteHeader(CsvHelper.CsvWriter csvWriter, TypeMap typeMap)
         {
+            if (csvWriter == null)
+            {
+                throw new ArgumentNullException(nameof(csvWriter));
+            }
+
+            if (typeMap == null)
+            {
+                throw new ArgumentNullException(nameof(typeMap));
+            }
+
             this.logger.LogDebug("Writing Header for {TypeMap}", typeMap.ClassKind.ToString());
 
             foreach (var propertyMap in typeMap.Properties)
@@ -280,6 +302,11 @@ namespace STARIONGROUP.DEHCSV
         /// </returns>
         protected internal string QueryFileName(TypeMap typeMap)
         {
+            if (typeMap == null)
+            {
+                throw new ArgumentNullException(nameof(typeMap));
+            }
+
             if (!string.IsNullOrEmpty(typeMap.FileName))
             {
                 return typeMap.FileName;

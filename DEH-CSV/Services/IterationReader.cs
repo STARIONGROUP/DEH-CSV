@@ -81,6 +81,30 @@ namespace STARIONGROUP.DEHCSV.Services
                 throw new ArgumentNullException(nameof(session));
             }
 
+            return await ReadInternalAsync(session, modelShortName, iterationNumber, domainOfExpertiseShortName);
+        }
+
+        /// <summary>
+        /// ReadAsync the iteration from the 
+        /// </summary>
+        /// <param name="session">
+        /// The <see cref="ISession"/> object used to read the <see cref="Iteration"/> data
+        /// </param>
+        /// <param name="modelShortName">
+        /// The shortName of the <see cref="EngineeringModel"/> that is to be opened
+        /// </param>
+        /// <param name="iterationNumber">
+        /// The number of hte <see cref="Iteration"/> that is to be read
+        /// </param>
+        /// <param name="domainOfExpertiseShortName">
+        /// The shortName of the <see cref="DomainOfExpertise"/> used to open the <see cref="EngineeringModel"/> with
+        /// </param>
+        /// <returns>
+        /// An instance of <see cref="Iteration"/>
+        /// </returns>
+        private async Task<Iteration> ReadInternalAsync(ISession session, string modelShortName, int iterationNumber,
+            string domainOfExpertiseShortName)
+        {
             this.logger.LogDebug("Setting up the read request for {ModelShortName}:{IterationNumber}", modelShortName, iterationNumber);
 
             var siteDirectory = session.RetrieveSiteDirectory();
@@ -104,7 +128,7 @@ namespace STARIONGROUP.DEHCSV.Services
             {
                 throw new InstanceNotFoundException($"The DomainOfExpertise with shortName {domainOfExpertiseShortName} could not be found");
             }
-            
+
             var engineeringModel = new EngineeringModel(engineeringModelSetup.EngineeringModelIid, session.Assembler.Cache, session.Credentials.Uri);
             engineeringModel.EngineeringModelSetup = engineeringModelSetup;
 
