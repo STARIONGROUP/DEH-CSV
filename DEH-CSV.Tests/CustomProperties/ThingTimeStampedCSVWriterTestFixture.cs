@@ -21,16 +21,11 @@
 namespace STARIONGROUP.DEHCSV.Tests.CustomProperties
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using System.Threading.Tasks;
 
-    using CDP4Common.CommonData;
     using CDP4Dal;
     using CDP4Dal.DAL;
-
-    using Microsoft.Extensions.Logging;
 
     using NUnit.Framework;
 
@@ -48,7 +43,7 @@ namespace STARIONGROUP.DEHCSV.Tests.CustomProperties
         
         private IterationReader iterationReader;
 
-        private IMappingProvider mappingProvider;
+        private MappingProvider mappingProvider;
 
         private Uri uri;
 

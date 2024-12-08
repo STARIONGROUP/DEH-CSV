@@ -49,7 +49,7 @@ namespace STARIONGROUP.DEHCSV.Tests
 
         private IterationReader iterationReader;
 
-        private IMappingProvider mappingProvider;
+        private MappingProvider mappingProvider;
 
         private Uri uri;
 
