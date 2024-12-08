@@ -89,6 +89,11 @@ namespace STARIONGROUP.DEHCSV
         /// </param>
         public void Write(Iteration iteration, bool includeNestedElements, IEnumerable<TypeMap> maps, DirectoryInfo target, object options)
         {
+            if (iteration == null)
+            {
+                throw new ArgumentNullException(nameof(iteration));
+            }
+
             var things = iteration.Cache.Select(item => item.Value.Value).ToList();
 
             if (includeNestedElements)
@@ -105,7 +110,7 @@ namespace STARIONGROUP.DEHCSV
                 }
             }
 
-            this.logger.LogDebug("A total of {count} are available in the data set", things.Count);
+            this.logger.LogDebug("A total of {Count} are available in the data set", things.Count);
 
             foreach (var typeMap in maps)
             {
@@ -113,7 +118,7 @@ namespace STARIONGROUP.DEHCSV
 
                 this.Write(targetThings, typeMap, target, options);
 
-                this.logger.LogInformation("Writing CSV file for {classKind}", typeMap.ClassKind);
+                this.logger.LogInformation("Writing CSV file for {ClassKind}", typeMap.ClassKind);
             }
         }
 
@@ -182,7 +187,7 @@ namespace STARIONGROUP.DEHCSV
                     {
                         if (queryResult != null)
                         {
-                            var csvValue = propertyMap.ValuePrefix + queryResult.ToString();
+                            var csvValue = propertyMap.ValuePrefix + queryResult;
                             
                             csvWriter.WriteField(csvValue, true);
                         }
@@ -198,7 +203,7 @@ namespace STARIONGROUP.DEHCSV
 
             csvWriter.Flush();
 
-            this.logger.LogDebug("A total of {records} records was written to {filepath} in {time} [ms]",
+            this.logger.LogDebug("A total of {Records} records was written to {Filepath} in {Time} [ms]",
                 things.Count(), path, sw.ElapsedMilliseconds);
         }
 
@@ -228,6 +233,16 @@ namespace STARIONGROUP.DEHCSV
         /// </remarks>
         protected virtual object QueryValue(Thing thing, PropertyMap propertyMap, object options)
         {
+            if (thing == null)
+            {
+                throw new ArgumentNullException(nameof(thing));
+            }
+
+            if (propertyMap == null)
+            {
+                throw new ArgumentNullException(nameof(propertyMap));
+            }
+
             return thing.QueryValue(propertyMap.Source);
         }
 
@@ -242,7 +257,7 @@ namespace STARIONGROUP.DEHCSV
         /// </param>
         protected void WriteHeader(CsvHelper.CsvWriter csvWriter, TypeMap typeMap)
         {
-            this.logger.LogDebug("Writing Header for {typeMap}", typeMap.ClassKind.ToString());
+            this.logger.LogDebug("Writing Header for {TypeMap}", typeMap.ClassKind.ToString());
 
             foreach (var propertyMap in typeMap.Properties)
             {

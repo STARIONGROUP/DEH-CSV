@@ -61,6 +61,11 @@ namespace STARIONGROUP.DEHCSV.CustomProperties
             // ThingTimeStamp or ThingTimeStampPropertyEvaluator and override the
             // CsvWriter.QueryValue method
 
+            if (thing == null)
+            {
+                throw new ArgumentNullException(nameof(thing));
+            }
+
             return $"{thing.ClassKind}:{DateTime.UtcNow}";
         }
     }

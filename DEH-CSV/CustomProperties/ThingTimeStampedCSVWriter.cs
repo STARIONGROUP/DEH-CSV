@@ -23,6 +23,7 @@ namespace STARIONGROUP.DEHCSV.CustomProperties
     using CDP4Common.CommonData;
 
     using  STARIONGROUP.DEHCSV.Mapping;
+    using System;
 
     /// <summary>
     /// Custom CSV Writer that used the <see cref="ThingTimeStampPropertyEvaluator"/>
@@ -56,6 +57,16 @@ namespace STARIONGROUP.DEHCSV.CustomProperties
         /// </remarks>
         protected override object QueryValue(Thing thing, PropertyMap propertyMap, object options)
         {
+            if (thing == null)
+            {
+                throw new ArgumentNullException(nameof(thing));
+            }
+
+            if (propertyMap == null)
+            {
+                throw new ArgumentNullException(nameof(propertyMap));
+            }
+
             switch (propertyMap.Source)
             {
                 case "ThingTimeStamp":

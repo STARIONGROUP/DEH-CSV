@@ -60,7 +60,7 @@ namespace STARIONGROUP.DEHCSV.Mapping
         /// </returns>
         public IEnumerable<TypeMap> QueryMappings(string path)
         {
-            this.logger.LogDebug("Reading the mapping from {path}", path);
+            this.logger.LogDebug("Reading the mapping from {Path}", path);
 
             var json = File.ReadAllText(path);
 
@@ -74,7 +74,7 @@ namespace STARIONGROUP.DEHCSV.Mapping
 
             var mappings = JsonSerializer.Deserialize<List<TypeMap>>(json, options);
 
-            this.logger.LogDebug("A total of {count} mappings have been found", mappings.Count);
+            this.logger.LogDebug("A total of {Count} mappings have been found", mappings.Count);
 
             return mappings;
         }

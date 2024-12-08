@@ -21,6 +21,7 @@
 namespace STARIONGROUP.DEHCSV.Services
 {
     using System;
+    using System.Globalization;
 
     using CDP4Dal.DAL;
 
@@ -61,7 +62,12 @@ namespace STARIONGROUP.DEHCSV.Services
         /// </returns>
         public IDal Select(Uri uri)
         {
-            switch (uri.Scheme.ToLower())
+            if (uri == null)
+            {
+                throw new ArgumentNullException(nameof(uri));
+            }
+
+            switch (uri.Scheme.ToLower(CultureInfo.InvariantCulture))
             {
                 case "http":
                 case "https":

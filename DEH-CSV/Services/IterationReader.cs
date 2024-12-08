@@ -32,6 +32,7 @@ namespace STARIONGROUP.DEHCSV.Services
 
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Logging.Abstractions;
+    using System;
 
     /// <summary>
     /// The purpose of the <see cref="IIterationReader"/> is to read an <see cref="Iteration"/>
@@ -75,7 +76,12 @@ namespace STARIONGROUP.DEHCSV.Services
         /// </returns>
         public async Task<Iteration> ReadAsync(ISession session, string modelShortName, int iterationNumber, string domainOfExpertiseShortName)
         {
-            this.logger.LogDebug("Setting up the read request for {modelShortName}:{iterationNumber}", modelShortName, iterationNumber);
+            if (session == null)
+            {
+                throw new ArgumentNullException(nameof(session));
+            }
+
+            this.logger.LogDebug("Setting up the read request for {ModelShortName}:{IterationNumber}", modelShortName, iterationNumber);
 
             var siteDirectory = session.RetrieveSiteDirectory();
             var engineeringModelSetup = siteDirectory.Model.SingleOrDefault(x => x.ShortName == modelShortName);
@@ -107,7 +113,7 @@ namespace STARIONGROUP.DEHCSV.Services
 
             engineeringModel.Iteration.Add(iteration);
 
-            this.logger.LogDebug("Reading iteration data from the data-source {dataSource}", session.DataSourceUri);
+            this.logger.LogDebug("Reading iteration data from the data-source {DataSource}", session.DataSourceUri);
             await session.Read(iteration, domainOfExpertise);
 
             this.logger.LogDebug("Reading iteration from cache");

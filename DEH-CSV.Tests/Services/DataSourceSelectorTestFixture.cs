@@ -57,7 +57,7 @@ namespace STARIONGROUP.DEHCSV.Tests.Services
 
             var dal = this.dataSourceSelector.Select(uri);
 
-            Assert.That(dal, Is.InstanceOf(typeof(CDP4JsonFileDal.JsonFileDal)));
+            Assert.That(dal, Is.InstanceOf<CDP4JsonFileDal.JsonFileDal>());
         }
 
         [Test]
@@ -68,11 +68,11 @@ namespace STARIONGROUP.DEHCSV.Tests.Services
 
             var dal = this.dataSourceSelector.Select(httpUri);
 
-            Assert.That(dal, Is.InstanceOf(typeof(CDP4ServicesDal.CdpServicesDal)));
+            Assert.That(dal, Is.InstanceOf<CDP4ServicesDal.CdpServicesDal>());
 
             dal = this.dataSourceSelector.Select(httpsUri);
 
-            Assert.That(dal, Is.InstanceOf(typeof(CDP4ServicesDal.CdpServicesDal)));
+            Assert.That(dal, Is.InstanceOf<CDP4ServicesDal.CdpServicesDal>());
         }
 
         [Test]
