@@ -7,15 +7,18 @@
     <PackageTags>CDP COMET ECSS-E-TM-10-25 CSV</PackageTags>
     <PackageIcon>cdp4-icon.png</PackageIcon>
     <RootNamespace>STARIONGROUP.DEHCSV</RootNamespace>
-    <Version>2.0.1</Version>
+    <Version>3.0.0</Version>
     <LangVersion>latest</LangVersion>
     <IncludeSource>true</IncludeSource>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageReleaseNotes>
-        [Update] to CDP4-SDK version 27.3.4
-        [Update] to CsvHelper version 33.0.1
-        [Update] to System.Text.Json version 8.0.4
+        [Update] to CDP4-SDK version 27.4.1
+        [Update] to Microsoft.Extensions.Logging.Abstractions version 9.0.0
+        [Update] to System.Text.Json version 9.0.0
+        [Rename] ICsvReader.Read => ReaderAsync
+        [Rename] IIterationReader.Read => ReaderAsync
+        [Add] extensive Parameter validation
     </PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
