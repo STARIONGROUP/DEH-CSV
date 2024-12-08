@@ -113,7 +113,7 @@ namespace STARIONGROUP.DEHCSV.Tests
 
             var domain = loftModel.Participant.Single(x => x.Person == this.session.ActivePerson).SelectedDomain;
             await this.session.Read(iteration, domain);
-            var mappedThings = (await this.csvReader.Read(csvStream, typeMaps.ToList(), this.session)).ToList();
+            var mappedThings = (await this.csvReader.ReadAsync(csvStream, typeMaps.ToList(), this.session)).ToList();
 
             Assert.Multiple(() =>
             {

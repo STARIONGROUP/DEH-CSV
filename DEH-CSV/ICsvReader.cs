@@ -44,6 +44,6 @@ namespace STARIONGROUP.DEHCSV
         /// <param name="typeMaps">The collection of <see cref="TypeMap" />s</param>
         /// <param name="session">The <see cref="ISession" /> that helps to retrieve <see cref="Thing" /></param>
         /// <returns>A <see cref="Task{T}" /> that returns a collection of mapped <see cref="Thing" />s</returns>
-        Task<IEnumerable<Thing>> Read(Stream stream, IReadOnlyCollection<TypeMap> typeMaps, ISession session);
+        Task<IEnumerable<Thing>> ReadAsync(Stream stream, IReadOnlyCollection<TypeMap> typeMaps, ISession session);
     }
 }

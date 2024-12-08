@@ -71,7 +71,7 @@ namespace STARIONGROUP.DEHCSV
         /// <param name="typeMaps">The collection of <see cref="TypeMap" />s</param>
         /// <param name="session">The <see cref="ISession" /> that helps to retrieve <see cref="Thing" /></param>
         /// <returns>A <see cref="Task{T}" /> that returns a collection of mapped <see cref="Thing" />s</returns>
-        public async Task<IEnumerable<Thing>> Read(Stream stream, IReadOnlyCollection<TypeMap> typeMaps, ISession session)
+        public async Task<IEnumerable<Thing>> ReadAsync(Stream stream, IReadOnlyCollection<TypeMap> typeMaps, ISession session)
         {
             ValidateReadParameters(stream, typeMaps, session);
 
@@ -90,7 +90,7 @@ namespace STARIONGROUP.DEHCSV
                 DetectDelimiter = true
             });
 
-            await this.ReadHeader(reader, typeMaps);
+            await this.ReadHeaderAsync(reader, typeMaps);
 
             while (await reader.ReadAsync())
             {
@@ -226,6 +226,8 @@ namespace STARIONGROUP.DEHCSV
                         }
 
                         break;
+                    default:
+                        throw new InvalidDataException("The referenced value is not a Thing or IEnumerable<Thing>");
                 }
             }
 
@@ -434,7 +436,7 @@ namespace STARIONGROUP.DEHCSV
         /// <param name="reader">The <see cref="IReader" /> used to read CSV content</param>
         /// <param name="typeMaps">The collection of <see cref="TypeMap" />s</param>
         /// <returns>A <see cref="Task" /></returns>
-        private async Task ReadHeader(IReader reader, IEnumerable<TypeMap> typeMaps)
+        private async Task ReadHeaderAsync(IReader reader, IEnumerable<TypeMap> typeMaps)
         {
             await reader.ReadAsync();
 
@@ -446,7 +448,7 @@ namespace STARIONGROUP.DEHCSV
 
             var headers = reader.HeaderRecord;
 
-            if (typeMaps.SelectMany(x => x.Properties).FirstOrDefault(p => Array.TrueForAll(headers, x => !x.Equals(p.Source))) is { } invalidPropertyMap)
+            if (typeMaps.SelectMany(x => x.Properties).FirstOrDefault(p => Array.TrueForAll(headers, x => !x.Equals(p.Source, StringComparison.Ordinal))) is { } invalidPropertyMap)
             {
                 this.logger.LogError("The provided CSV does not contains any header for the source {0}", invalidPropertyMap.Source);
                 throw new InvalidDataException($"The provided CSV does not contains any header for the source {invalidPropertyMap.Source}");
@@ -454,7 +456,7 @@ namespace STARIONGROUP.DEHCSV
         }
 
         /// <summary>
-        /// Validates all parameters provided for the <see cref="Read" /> method
+        /// Validates all parameters provided for the <see cref="ReadAsync" /> method
         /// </summary>
         /// <param name="stream">The provided <see cref="Stream" /></param>
         /// <param name="typeMaps">The provided collection of <see cref="TypeMap" />s</param>

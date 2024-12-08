@@ -86,7 +86,7 @@ namespace STARIONGROUP.DEHCSV.Tests.CustomProperties
 
             await session.Open(false);
 
-            var iteration = await this.iterationReader.Read(session, "DM_SPC", 1, "SYS");
+            var iteration = await this.iterationReader.ReadAsync(session, "DM_SPC", 1, "SYS");
 
             var outputPath = Path.Combine(TestContext.CurrentContext.WorkDirectory, "CSV-Thing-TimeStamped");
             var target = new DirectoryInfo(outputPath);

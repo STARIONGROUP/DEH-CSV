@@ -34,7 +34,7 @@ namespace STARIONGROUP.DEHCSV.Services
     public interface IIterationReader
     {
         /// <summary>
-        /// Read the iteration from the 
+        /// ReadAsync the iteration from the 
         /// </summary>
         /// <param name="session">
         /// The <see cref="ISession"/> object used to read the <see cref="Iteration"/> data
@@ -51,6 +51,6 @@ namespace STARIONGROUP.DEHCSV.Services
         /// <returns>
         /// An instance of <see cref="Iteration"/>
         /// </returns>
-        Task<Iteration> Read(ISession session, string modelShortName, int iterationNumber, string domainOfExpertiseShortName);
+        Task<Iteration> ReadAsync(ISession session, string modelShortName, int iterationNumber, string domainOfExpertiseShortName);
     }
 }

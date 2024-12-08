@@ -56,7 +56,7 @@ namespace STARIONGROUP.DEHCSV.Services
         }
 
         /// <summary>
-        /// Read the iteration from the 
+        /// ReadAsync the iteration from the 
         /// </summary>
         /// <param name="session">
         /// The <see cref="ISession"/> object used to read the <see cref="Iteration"/> data
@@ -73,7 +73,7 @@ namespace STARIONGROUP.DEHCSV.Services
         /// <returns>
         /// An instance of <see cref="Iteration"/>
         /// </returns>
-        public async Task<Iteration> Read(ISession session, string modelShortName, int iterationNumber, string domainOfExpertiseShortName)
+        public async Task<Iteration> ReadAsync(ISession session, string modelShortName, int iterationNumber, string domainOfExpertiseShortName)
         {
             this.logger.LogDebug("Setting up the read request for {modelShortName}:{iterationNumber}", modelShortName, iterationNumber);
 

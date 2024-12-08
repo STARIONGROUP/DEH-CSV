@@ -76,7 +76,7 @@ namespace STARIONGROUP.DEHCSV.Tests.Services
 
             await session.Open(false);
 
-            var iteration = await this.iterationReader.Read(session, "DM_SPC", 1, "SYS");
+            var iteration = await this.iterationReader.ReadAsync(session, "DM_SPC", 1, "SYS");
 
             Assert.That(iteration, Is.Not.Null);
         }
@@ -96,13 +96,13 @@ namespace STARIONGROUP.DEHCSV.Tests.Services
 
             await session.Open(false);
 
-            Assert.That(async () => await this.iterationReader.Read(session, "XXX", 1, "SYS"),
+            Assert.That(async () => await this.iterationReader.ReadAsync(session, "XXX", 1, "SYS"),
                 Throws.Exception.With.Message.EqualTo("The EngineeringModelSetup with shortName XXX could not be found"));
 
-            Assert.That(async () => await this.iterationReader.Read(session, "DM_SPC", 12, "SYS"),
+            Assert.That(async () => await this.iterationReader.ReadAsync(session, "DM_SPC", 12, "SYS"),
                 Throws.Exception.With.Message.EqualTo("The IterationSetup with number 12 could not be found"));
 
-            Assert.That(async () => await this.iterationReader.Read(session, "DM_SPC", 1, "SYE"),
+            Assert.That(async () => await this.iterationReader.ReadAsync(session, "DM_SPC", 1, "SYE"),
                 Throws.Exception.With.Message.EqualTo("The DomainOfExpertise with shortName SYE could not be found"));
         }
     }

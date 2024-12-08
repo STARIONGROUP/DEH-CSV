@@ -92,7 +92,7 @@ namespace STARIONGROUP.DEHCSV.Tests
 
             await session.Open(false);
 
-            var iteration = await this.iterationReader.Read(session, "DM_SPC", 1, "SYS");
+            var iteration = await this.iterationReader.ReadAsync(session, "DM_SPC", 1, "SYS");
 
             var outputPath = Path.Combine(TestContext.CurrentContext.WorkDirectory, "CSV");
             var target = new DirectoryInfo(outputPath);
@@ -117,7 +117,7 @@ namespace STARIONGROUP.DEHCSV.Tests
 
             await session.Open(false);
 
-            var iteration = await this.iterationReader.Read(session, "DM_SPC", 1, "SYS");
+            var iteration = await this.iterationReader.ReadAsync(session, "DM_SPC", 1, "SYS");
             
             var typeMaps = new List<TypeMap>
             {
