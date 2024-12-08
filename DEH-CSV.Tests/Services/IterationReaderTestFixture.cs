@@ -62,6 +62,13 @@ namespace STARIONGROUP.DEHCSV.Tests.Services
         }
 
         [Test]
+        public void Verify_that_when_ReadAsync_is_called_with_null_iteration_exception_is_thrown()
+        {
+            Assert.That(() => this.iterationReader.ReadAsync(null, "DM_SPC", 1, "SYS"),
+                Throws.ArgumentNullException);
+        }
+
+        [Test]
         public async Task Verify_that_iteration_can_be_read_from_data_source_demo_space()
         {
             var jsonFileDal = new CDP4JsonFileDal.JsonFileDal();

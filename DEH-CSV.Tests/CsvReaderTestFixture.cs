@@ -155,5 +155,24 @@ namespace STARIONGROUP.DEHCSV.Tests
                 count++;
             }
         }
+
+        [Test]
+        public void Verify_that_when_ReadAsync_is_called_with_null_or_empty_arguments_exception_is_thrown()
+        {
+            Stream stream = new MemoryStream();
+            IReadOnlyCollection<TypeMap> typeMaps = new List<TypeMap>();
+            
+            Assert.That(() => this.csvReader.ReadAsync(null, null, null), 
+                Throws.ArgumentNullException);
+
+            Assert.That(() => this.csvReader.ReadAsync(stream, null, null),
+                Throws.ArgumentNullException);
+
+            Assert.That(() => this.csvReader.ReadAsync(stream, typeMaps, null),
+                Throws.ArgumentNullException);
+
+            Assert.That(() => this.csvReader.ReadAsync(stream, typeMaps, this.session),
+                Throws.ArgumentException);
+        }
     }
 }

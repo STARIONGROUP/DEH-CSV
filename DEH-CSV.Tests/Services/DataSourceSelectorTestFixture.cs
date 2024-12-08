@@ -49,6 +49,12 @@ namespace STARIONGROUP.DEHCSV.Tests.Services
         }
 
         [Test]
+        public void Verify_that_when_select_is_called_with_null_uri_exception_is_thrown()
+        {
+            Assert.That(() => this.dataSourceSelector.Select(null), Throws.ArgumentNullException); 
+        }
+
+        [Test]
         public void Verify_that_when_a_file_uri_is_provided_a_file_dal_is_returned()
         {
             var path = Path.Combine(TestContext.CurrentContext.WorkDirectory,"Data", "Xipe.zip");
